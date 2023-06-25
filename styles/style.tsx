@@ -1,7 +1,8 @@
 import {StyleSheet} from 'react-native';
 
 export const theme = {
-  primary: '#D9D9D9',
+  secondary: '#D9D9D9',
+  primary: '#2f120d',
   fontColor: '#2b2b2b',
   backgroundColor: '#D9D9D9',
   buttonPrimary: '#e68e24',
