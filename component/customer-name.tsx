@@ -1,9 +1,13 @@
-import {View, Text} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 import React from 'react';
 import {SvgXml} from 'react-native-svg';
 import {style} from '../styles/style';
 
-const CustomerName = () => {
+type Props = {
+  onChangeName?: (name: string) => void;
+};
+
+const CustomerName = (props: Props) => {
   return (
     <View
       style={{
@@ -14,7 +18,11 @@ const CustomerName = () => {
         paddingHorizontal: 20,
       }}>
       <View style={{flex: 5}}>
-        <Text style={{...style.h2}}>Customer Name</Text>
+        <TextInput
+          style={{...style.h2, margin: 0, padding: 0}}
+          placeholder="Customer Name"
+          onChangeText={props.onChangeName}
+        />
         <Text>Cashier Name</Text>
       </View>
       <View>
