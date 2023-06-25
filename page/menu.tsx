@@ -7,16 +7,18 @@ import {RootStackParamList} from '../types/navigation';
 import Search from '../component/search';
 import Product from '../component/product';
 import MenuTitle from '../component/title';
+import useTheme from '../hooks/useTheme';
 
 const Menu = ({
   navigation,
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
+  const theme = useTheme();
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
       <View>
-        <Text>Menu</Text>
+        <Text style={{color: theme.text}}>Menu</Text>
       </View>
       <MenuTitle>Bundles</MenuTitle>
       <View style={menuStyle.productsContainer}>

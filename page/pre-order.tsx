@@ -8,10 +8,11 @@ import CustomerName from '../component/customer-name';
 import Box from '../component/box';
 import LineSpace from '../component/line-space';
 import CartItem from '../component/cart-item';
-import {style, theme} from '../styles/style';
+import {style} from '../styles/style';
 import Button from '../component/button';
 import useMenuContext from '../context/menuContext';
 import {SvgXml} from 'react-native-svg';
+import useTheme from '../hooks/useTheme';
 
 const PreOrder = ({
   navigation,
@@ -19,6 +20,7 @@ const PreOrder = ({
 }: BottomTabScreenProps<RootStackParamList>) => {
   const menuContext = useMenuContext();
   const [modalVisible, setModalVisible] = useState(false);
+  const theme = useTheme();
 
   const handlePlaceOrder = () => {
     menuContext.clearMenu();
@@ -29,7 +31,7 @@ const PreOrder = ({
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
-      <Text>Pre Order</Text>
+      <Text style={{color: theme.text}}>Pre Order</Text>
       {menuContext.state.itemsOrdered.length != 0 && (
         <CustomerName onChangeName={menuContext.onChangeName} />
       )}

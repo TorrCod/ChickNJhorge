@@ -27,10 +27,14 @@ const Product = ({name, price}: Props) => {
     <View
       style={{
         ...style.productContainer,
-        backgroundColor: productCount ? theme.backShade : theme.backShade,
+        backgroundColor: productCount ? theme.primary : theme.backShade,
+        borderLeftColor: theme.primary,
+        borderLeftWidth: 5,
       }}>
-      <Text style={{color: productCount ? 'white' : 'black'}}>{name}</Text>
-      <Text style={{color: productCount ? '#b5b5b5' : undefined}}>
+      <Text style={{color: productCount ? 'white' : theme.textPrimary}}>
+        {name}
+      </Text>
+      <Text style={{color: productCount ? '#b5b5b5' : theme.text}}>
         ₱ {price}
       </Text>
       {/* {option && <Dropdown label="Option" data={option} onSelect={arg => {}} />} */}
