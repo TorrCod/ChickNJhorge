@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {ReactNode} from 'react';
+import {theme} from '../styles/style';
 
 type Props = {children: ReactNode; backgroundColor?: string; fontSize?: number};
 
@@ -8,7 +9,7 @@ const CircleCount = ({children, backgroundColor, fontSize}: Props) => {
     <View
       style={{
         ...styles.numberContainer,
-        backgroundColor: backgroundColor ?? 'black',
+        backgroundColor: backgroundColor ?? theme.primary,
       }}>
       <Text style={{...styles.text, fontSize: fontSize ?? 11}}>{children}</Text>
     </View>
