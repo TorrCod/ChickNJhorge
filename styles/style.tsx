@@ -20,7 +20,7 @@ export const style = StyleSheet.create({
     gap: 5,
   },
   productContainer: {
-    width: 190,
+    width: 180,
     height: 119,
     backgroundColor: theme.primary,
     borderRadius: 10,

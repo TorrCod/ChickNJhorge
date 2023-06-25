@@ -32,6 +32,7 @@ const Menu = ({
         <Product name="Chicken W/ Unli Rice" price={79} />
         <Product name="2 pcs Chicken W/ Rice" price={80} />
         <Product name="Leg Quarter / Breast Part" price={65} />
+        <View style={{width: 180}}></View>
       </View>
       <MenuTitle>Alacart</MenuTitle>
       <View style={menuStyle.productsContainer}>
@@ -62,11 +63,11 @@ const Menu = ({
 
 const menuStyle = StyleSheet.create({
   productsContainer: {
-    ...style.center,
-    flex: 1,
+    display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 3,
+    gap: 5,
+    justifyContent: 'space-evenly',
   },
 });
 
