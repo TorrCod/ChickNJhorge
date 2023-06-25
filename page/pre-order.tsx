@@ -29,7 +29,7 @@ const PreOrder = ({
   };
 
   return (
-    <Layout onCartPress={() => navigation.navigate('PreOrder')}>
+    <Layout cartFocused onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
       <Text style={{color: theme.text}}>Pre Order</Text>
       {menuContext.state.itemsOrdered.length != 0 && (
