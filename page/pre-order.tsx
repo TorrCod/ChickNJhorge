@@ -17,6 +17,11 @@ const PreOrder = ({
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
   const menuContext = useMenuContext();
+
+  const handlePlaceOrder = () => {
+    menuContext.clearMenu();
+  };
+
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
@@ -56,7 +61,7 @@ const PreOrder = ({
               </Text>
             </View>
             <View style={style.center}>
-              <Button>
+              <Button onPress={handlePlaceOrder}>
                 <Text style={{color: 'white', paddingHorizontal: 50}}>
                   Place Order
                 </Text>

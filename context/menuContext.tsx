@@ -10,6 +10,7 @@ const menuValueInit: MenuValue = {
   state: menuStateInit,
   updateOrderMenu: (item: Item) => {},
   onChangeName(name) {},
+  clearMenu() {},
 };
 
 const MenuContext = createContext<MenuValue>(menuValueInit);
@@ -29,8 +30,9 @@ const MenuReducer = (state: MenuState, action: MenuAction): MenuState => {
     }
     case 'onChangeName':
       return {...state, customerName: action.payload};
-    default:
-      return state;
+
+    case 'clearMenu':
+      return menuStateInit;
   }
 };
 
@@ -64,8 +66,13 @@ export const MenuWrapper = ({children}: {children: React.ReactNode}) => {
     dispatch({type: 'onChangeName', payload: name});
   };
 
+  const clearMenu = () => {
+    dispatch({type: 'clearMenu'});
+  };
+
   return (
-    <MenuContext.Provider value={{state, updateOrderMenu, onChangeName}}>
+    <MenuContext.Provider
+      value={{state, updateOrderMenu, onChangeName, clearMenu}}>
       {children}
     </MenuContext.Provider>
   );
