@@ -15,7 +15,7 @@ type Props = {
 
 const Button = ({children, onPress}: Props) => {
   return (
-    <TouchableOpacity onPress={onPress} style={style.button}>
+    <TouchableOpacity onPress={onPress} style={{...style.button}}>
       {children}
     </TouchableOpacity>
   );

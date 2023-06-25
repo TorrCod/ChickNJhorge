@@ -43,5 +43,7 @@ export const style = StyleSheet.create({
     backgroundColor: theme.buttonPrimary,
     borderRadius: 10,
     paddingVertical: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
