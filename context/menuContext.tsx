@@ -27,7 +27,8 @@ const MenuReducer = (state: MenuState, action: MenuAction): MenuState => {
       };
       return newState;
     }
-
+    case 'onChangeName':
+      return {...state, customerName: action.payload};
     default:
       return state;
   }

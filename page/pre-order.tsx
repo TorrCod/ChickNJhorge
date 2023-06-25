@@ -21,7 +21,9 @@ const PreOrder = ({
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
       <Text>Pre Order</Text>
-      {menuContext.state.itemsOrdered.length != 0 && <CustomerName />}
+      {menuContext.state.itemsOrdered.length != 0 && (
+        <CustomerName onChangeName={menuContext.onChangeName} />
+      )}
       <LineSpace />
       <View style={{gap: 5}}>
         <Box>
