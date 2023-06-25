@@ -41,7 +41,7 @@ export const style = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: theme.buttonPrimary,
+    backgroundColor: theme.primary,
     borderRadius: 10,
     paddingVertical: 8,
     justifyContent: 'center',
