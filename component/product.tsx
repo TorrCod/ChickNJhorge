@@ -34,7 +34,8 @@ const Product = ({name, price}: Props) => {
       <Text style={{color: productCount ? 'white' : theme.textPrimary}}>
         {name}
       </Text>
-      <Text style={{color: productCount ? '#b5b5b5' : theme.text}}>
+      <Text
+        style={{color: productCount ? 'rgba(255, 255, 255, 0.8)' : theme.text}}>
         ₱ {price}
       </Text>
       {/* {option && <Dropdown label="Option" data={option} onSelect={arg => {}} />} */}
@@ -48,11 +49,13 @@ const Product = ({name, price}: Props) => {
           right: 15,
         }}>
         <TouchableOpacity onPress={minusHandle}>
-          <SvgXml color={productCount ? 'white' : '#4d4d4d'} xml={minusXml} />
+          <SvgXml color={productCount ? 'white' : theme.text} xml={minusXml} />
         </TouchableOpacity>
-        <Text style={productCount ? {color: 'white'} : {}}>{productCount}</Text>
+        <Text style={productCount ? {color: 'white'} : {color: theme.text}}>
+          {productCount}
+        </Text>
         <TouchableOpacity onPress={addHandle}>
-          <SvgXml color={productCount ? 'white' : '#4d4d4d'} xml={addXml} />
+          <SvgXml color={productCount ? 'white' : theme.text} xml={addXml} />
         </TouchableOpacity>
       </View>
     </View>
