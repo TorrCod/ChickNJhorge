@@ -43,9 +43,9 @@ export const MenuWrapper = ({children}: {children: React.ReactNode}) => {
     const itemIndex = state.itemsOrdered.findIndex(
       ({name}) => name === item.name,
     );
-    if (!isExist)
+    if (!isExist && item.count > 0)
       dispatch({type: 'onChangeMenu', payload: [...state.itemsOrdered, item]});
-    else if (item.count === 0) {
+    else if (item.count <= 0) {
       const newItemOrdered = [...state.itemsOrdered];
       newItemOrdered.splice(itemIndex, 1);
       dispatch({

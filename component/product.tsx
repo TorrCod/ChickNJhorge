@@ -5,22 +5,21 @@ import {SvgXml} from 'react-native-svg';
 import useMenuContext from '../context/menuContext';
 
 const Product = ({name, price}: Item) => {
-  const [count, setCount] = useState(0);
-  const addHandle = () => setCount(count + 1);
-  const minusHandle = () => setCount(count - 1 < 0 ? count : count - 1);
-  const {updateOrderMenu} = useMenuContext();
-  const firstRender = useRef(false);
-
-  useEffect(() => {
-    if (firstRender.current) updateOrderMenu({name, price, count});
-    else firstRender.current = true;
-  }, [count]);
+  const {updateOrderMenu, state} = useMenuContext();
+  const productCount =
+    state.itemsOrdered.filter(item => item.name === name)[0]?.count ?? 0;
+  const addHandle = () =>
+    updateOrderMenu({name, price, count: productCount + 1});
+  const minusHandle = () => {
+    const newCount = productCount - 1;
+    updateOrderMenu({name, price, count: newCount > 0 ? newCount : 0});
+  };
 
   return (
     <View
       style={{
         ...style.productContainer,
-        backgroundColor: count ? '#e68e24' : '#D9D9D9',
+        backgroundColor: productCount ? '#e68e24' : '#D9D9D9',
       }}>
       <Text style={{color: 'black'}}>{name}</Text>
       <Text>₱ {price}</Text>
@@ -37,7 +36,7 @@ const Product = ({name, price}: Item) => {
         <TouchableOpacity onPress={minusHandle}>
           <SvgXml xml={minusXml} />
         </TouchableOpacity>
-        <Text style={count ? {color: 'black'} : {}}>{count}</Text>
+        <Text style={productCount ? {color: 'black'} : {}}>{productCount}</Text>
         <TouchableOpacity onPress={addHandle}>
           <SvgXml xml={addXml} />
         </TouchableOpacity>
