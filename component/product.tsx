@@ -1,8 +1,9 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
-import {style, theme} from '../styles/style';
+import {style} from '../styles/style';
 import {SvgXml} from 'react-native-svg';
 import useMenuContext from '../context/menuContext';
+import useTheme from '../hooks/useTheme';
 
 type Props = {
   name: string;
@@ -20,12 +21,13 @@ const Product = ({name, price}: Props) => {
     const newCount = productCount - 1;
     updateOrderMenu({name, price, count: newCount > 0 ? newCount : 0});
   };
+  const theme = useTheme();
 
   return (
     <View
       style={{
         ...style.productContainer,
-        backgroundColor: productCount ? theme.primary : '#D9D9D9',
+        backgroundColor: productCount ? theme.backShade : theme.backShade,
       }}>
       <Text style={{color: productCount ? 'white' : 'black'}}>{name}</Text>
       <Text style={{color: productCount ? '#b5b5b5' : undefined}}>

@@ -9,6 +9,7 @@ import {View} from 'react-native';
 import PreOrder from './page/pre-order';
 import {RootStackParamList} from './types/navigation';
 import {MenuWrapper} from './context/menuContext';
+import useTheme from './hooks/useTheme';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -20,74 +21,81 @@ function App() {
   );
 }
 
-const NavScreen = () => (
-  <NavigationContainer>
-    <Tab.Navigator
-      initialRouteName="Menu"
-      screenOptions={{
-        tabBarActiveTintColor: 'rgba(0, 0, 0, 0.1)',
-      }}>
-      <Tab.Screen
-        name="Menu"
-        component={Menu}
-        options={{
-          headerShown: false,
-          tabBarIcon: tabBarProps => (
-            <TabBarIcon {...tabBarProps} xml={menuSvg} />
-          ),
-          tabBarShowLabel: false,
-          tabBarStyle: {height: 39},
-        }}
-      />
-      <Tab.Screen
-        name="Order"
-        component={Orders}
-        options={{
-          headerShown: false,
-          tabBarIcon: tabBarProps => (
-            <TabBarIcon {...tabBarProps} xml={orderSvg} />
-          ),
-          tabBarShowLabel: false,
-          tabBarStyle: {height: 39},
-        }}
-      />
-      <Tab.Screen
-        name="Transaction"
-        component={Transactions}
-        options={{
-          headerShown: false,
-          tabBarIcon: tabBarProps => (
-            <TabBarIcon {...tabBarProps} xml={transactionSvg} />
-          ),
-          tabBarShowLabel: false,
-          tabBarStyle: {height: 39},
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: false,
-          tabBarIcon: tabBarProps => (
-            <TabBarIcon {...tabBarProps} xml={profileSvg} />
-          ),
-          tabBarShowLabel: false,
-          tabBarStyle: {height: 39},
-        }}
-      />
-      <Tab.Screen
-        name="PreOrder"
-        component={PreOrder}
-        options={{
-          headerShown: false,
-          tabBarShowLabel: false,
-          tabBarButton: () => null,
-          tabBarStyle: {height: 39},
-        }}
-      />
-    </Tab.Navigator>
-  </NavigationContainer>
-);
+const NavScreen = () => {
+  const theme = useTheme();
+
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Menu"
+        screenOptions={{
+          tabBarActiveTintColor: 'rgba(0, 0, 0, 0.1)',
+        }}>
+        <Tab.Screen
+          name="Menu"
+          component={Menu}
+          options={{
+            headerShown: false,
+            tabBarIcon: tabBarProps => (
+              <TabBarIcon {...tabBarProps} xml={menuSvg} />
+            ),
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              height: 39,
+              backgroundColor: theme.backShade,
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Order"
+          component={Orders}
+          options={{
+            headerShown: false,
+            tabBarIcon: tabBarProps => (
+              <TabBarIcon {...tabBarProps} xml={orderSvg} />
+            ),
+            tabBarShowLabel: false,
+            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+          }}
+        />
+        <Tab.Screen
+          name="Transaction"
+          component={Transactions}
+          options={{
+            headerShown: false,
+            tabBarIcon: tabBarProps => (
+              <TabBarIcon {...tabBarProps} xml={transactionSvg} />
+            ),
+            tabBarShowLabel: false,
+            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerShown: false,
+            tabBarIcon: tabBarProps => (
+              <TabBarIcon {...tabBarProps} xml={profileSvg} />
+            ),
+            tabBarShowLabel: false,
+            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+          }}
+        />
+        <Tab.Screen
+          name="PreOrder"
+          component={PreOrder}
+          options={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarButton: () => null,
+            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
 
 type TabBarIconProps = {
   focused: boolean;

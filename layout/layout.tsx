@@ -44,7 +44,7 @@ const Layout = ({
         style={{
           ...backgroundStyle,
         }}>
-        <View style={{paddingHorizontal: 5, paddingBottom: 50, paddingTop: 30}}>
+        <View style={{paddingHorizontal: 5, paddingBottom: 48, paddingTop: 30}}>
           {children}
         </View>
       </ScrollView>

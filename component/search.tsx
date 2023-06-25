@@ -2,11 +2,18 @@ import {View, Text, StyleSheet, TextInput} from 'react-native';
 import React from 'react';
 import {style} from '../styles/style';
 import {SvgXml} from 'react-native-svg';
+import useTheme from '../hooks/useTheme';
 
 const Search = () => {
+  const theme = useTheme();
   return (
     <View style={style.center}>
-      <View style={{...style.input, paddingLeft: 10}}>
+      <View
+        style={{
+          ...style.input,
+          paddingLeft: 10,
+          backgroundColor: theme.backShade,
+        }}>
         <SvgXml xml={xml} width={15} height={15} color={'rgba(0, 0, 0, 0.8)'} />
         <TextInput style={{padding: 5}} placeholder="Search Product" />
       </View>
