@@ -21,7 +21,7 @@ const PreOrder = ({
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
       <Text>Pre Order</Text>
-      <CustomerName />
+      {menuContext.state.itemsOrdered.length != 0 && <CustomerName />}
       <LineSpace />
       <View style={{gap: 5}}>
         <Box>
@@ -35,28 +35,33 @@ const PreOrder = ({
                 key={index}
               />
             ))}
+            {!menuContext.state.itemsOrdered.length && (
+              <Text>No Item added from Menu</Text>
+            )}
           </View>
         </Box>
-        <Box>
-          {/* <View style={style.spaceBetween}>
+        {menuContext.state.itemsOrdered.length != 0 && (
+          <Box>
+            {/* <View style={style.spaceBetween}>
             <Text>Subtotal</Text>
             <Text>₱400</Text>
           </View> */}
-          <LineSpace />
-          <View style={style.spaceBetween}>
-            <Text style={{color: 'black'}}>Total</Text>
-            <Text style={{color: 'black'}}>
-              ₱{menuContext.state.totalPrice}
-            </Text>
-          </View>
-          <View style={style.center}>
-            <Button>
-              <Text style={{color: 'white', paddingHorizontal: 50}}>
-                Place Order
+            <LineSpace />
+            <View style={style.spaceBetween}>
+              <Text style={{color: 'black'}}>Total</Text>
+              <Text style={{color: 'black'}}>
+                ₱{menuContext.state.totalPrice}
               </Text>
-            </Button>
-          </View>
-        </Box>
+            </View>
+            <View style={style.center}>
+              <Button>
+                <Text style={{color: 'white', paddingHorizontal: 50}}>
+                  Place Order
+                </Text>
+              </Button>
+            </View>
+          </Box>
+        )}
       </View>
     </Layout>
   );
