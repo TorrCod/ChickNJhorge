@@ -9,6 +9,7 @@ const menuStateInit: MenuState = {
 const menuValueInit: MenuValue = {
   state: menuStateInit,
   updateOrderMenu: (item: Item) => {},
+  onChangeName(name) {},
 };
 
 const MenuContext = createContext<MenuValue>(menuValueInit);
@@ -58,8 +59,12 @@ export const MenuWrapper = ({children}: {children: React.ReactNode}) => {
     }
   };
 
+  const onChangeName = (name: string) => {
+    dispatch({type: 'onChangeName', payload: name});
+  };
+
   return (
-    <MenuContext.Provider value={{state, updateOrderMenu}}>
+    <MenuContext.Provider value={{state, updateOrderMenu, onChangeName}}>
       {children}
     </MenuContext.Provider>
   );
