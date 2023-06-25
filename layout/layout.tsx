@@ -45,8 +45,14 @@ const Layout = ({
         contentInsetAdjustmentBehavior="automatic"
         style={{
           ...backgroundStyle,
+          height: '100%',
         }}>
-        <View style={{paddingHorizontal: 5, paddingBottom: 48, paddingTop: 30}}>
+        <View
+          style={{
+            paddingHorizontal: 5,
+            paddingBottom: 48,
+            paddingTop: 30,
+          }}>
           {children}
         </View>
       </ScrollView>

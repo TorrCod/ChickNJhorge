@@ -5,11 +5,12 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SvgXml} from 'react-native-svg';
 import Transactions from './page/transaction';
 import Profile from './page/profile';
-import {View} from 'react-native';
+import {View, useColorScheme} from 'react-native';
 import PreOrder from './page/pre-order';
 import {RootStackParamList} from './types/navigation';
 import {MenuWrapper} from './context/menuContext';
 import useTheme from './hooks/useTheme';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -23,6 +24,10 @@ function App() {
 
 const NavScreen = () => {
   const theme = useTheme();
+  const isDarkMode = useColorScheme() === 'dark';
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
 
   return (
     <NavigationContainer>
