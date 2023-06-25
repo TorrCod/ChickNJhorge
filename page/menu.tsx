@@ -27,14 +27,7 @@ const Menu = ({
       </View>
       <MenuTitle>Single Meals</MenuTitle>
       <View style={menuStyle.productsContainer}>
-        <Product
-          name="Chicken W/ Unli Rice"
-          price={79}
-          option={[
-            {label: 'Leg Quarter', value: 'Leg Quarter'},
-            {label: 'Breast', value: 'Breast'},
-          ]}
-        />
+        <Product name="Chicken W/ Unli Rice" price={79} />
         <Product name="2 pcs Chicken W/ Rice" price={80} />
         <Product name="Leg Quarter / Breast Part" price={65} />
       </View>
@@ -44,29 +37,12 @@ const Menu = ({
         <Product name="Half Chicken" price={120} />
         <Product name="Leg Quarter" price={45} />
         <Product name="Breast Part" price={20} />
-        <Product
-          name="Assorted Part"
-          option={[
-            {label: 'Thigh PArt', value: 'Thigh PArt'},
-            {label: 'Drums Stick', value: 'Drums Stick'},
-            {label: 'Breast Small', value: 'Breast Small'},
-          ]}
-          price={45}
-        />
+        <Product name="Assorted Part" price={45} />
         <Product name="Leeg" price={20} />
       </View>
       <MenuTitle>Drinks</MenuTitle>
       <View style={menuStyle.productsContainer}>
-        <Product
-          name="Soft Drinks"
-          price={20}
-          option={[
-            {label: 'Coke', value: 'Coke'},
-            {label: 'Mountain Dew', value: 'Mountain Dew'},
-            {label: 'Royal', value: 'Royal'},
-            {label: 'Sprite', value: 'Sprite'},
-          ]}
-        />
+        <Product name="Soft Drinks" price={20} />
         <Product name="Ice Tea" price={50} />
       </View>
       <MenuTitle>Addons</MenuTitle>

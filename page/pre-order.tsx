@@ -20,6 +20,7 @@ const PreOrder = ({
 
   const handlePlaceOrder = () => {
     menuContext.clearMenu();
+    navigation.navigate('Menu');
   };
 
   return (

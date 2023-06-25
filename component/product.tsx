@@ -4,7 +4,13 @@ import {style} from '../styles/style';
 import {SvgXml} from 'react-native-svg';
 import useMenuContext from '../context/menuContext';
 
-const Product = ({name, price}: Item) => {
+type Props = {
+  name: string;
+  price: number;
+  count?: number;
+};
+
+const Product = ({name, price}: Props) => {
   const {updateOrderMenu, state} = useMenuContext();
   const productCount =
     state.itemsOrdered.filter(item => item.name === name)[0]?.count ?? 0;
