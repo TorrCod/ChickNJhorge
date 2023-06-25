@@ -92,7 +92,7 @@ const PreOrder = ({
             </View>
             <View
               style={{
-                backgroundColor: '#ebedf0',
+                backgroundColor: '#f5f5f5',
                 alignItems: 'flex-end',
                 paddingHorizontal: 27,
                 paddingVertical: 10,
