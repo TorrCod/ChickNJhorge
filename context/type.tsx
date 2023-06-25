@@ -1,6 +1,7 @@
 type MenuState = {
   itemsOrdered: Item[];
   totalNumberOfOrder: number;
+  totalPrice: number;
 };
 
 type Item = {name: string; price: number; count: number};

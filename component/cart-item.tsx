@@ -11,7 +11,7 @@ const CartItem = (props: Props) => {
   return (
     <View style={styles.cartItem}>
       <View style={{flex: 0.3}}>
-        <CircleCount>{props.count}</CircleCount>
+        <CircleCount>{props.number}</CircleCount>
       </View>
       <Text style={{flex: 2}}>{props.name}</Text>
       <Text style={{flex: 1}}>x{props.count}</Text>

@@ -10,11 +10,13 @@ import LineSpace from '../component/line-space';
 import CartItem from '../component/cart-item';
 import {style} from '../styles/style';
 import Button from '../component/button';
+import useMenuContext from '../context/menuContext';
 
 const PreOrder = ({
   navigation,
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
+  const menuContext = useMenuContext();
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
@@ -24,24 +26,28 @@ const PreOrder = ({
       <View style={{gap: 5}}>
         <Box>
           <View style={{gap: 5}}>
-            <CartItem name="Whole Chicken" price={200} count={2} number={1} />
-            <CartItem name="half Chicken" price={70} count={2} number={2} />
-            <CartItem name="Breast" price={30} count={1} number={3} />
+            {menuContext.state.itemsOrdered.map((item, index) => (
+              <CartItem
+                name={item.name}
+                price={item.price}
+                count={item.count}
+                number={index + 1}
+                key={index}
+              />
+            ))}
           </View>
         </Box>
         <Box>
-          <View style={style.spaceBetween}>
+          {/* <View style={style.spaceBetween}>
             <Text>Subtotal</Text>
             <Text>₱400</Text>
-          </View>
-          <View style={style.spaceBetween}>
-            <Text>tax</Text>
-            <Text>40</Text>
-          </View>
+          </View> */}
           <LineSpace />
           <View style={style.spaceBetween}>
             <Text style={{color: 'black'}}>Total</Text>
-            <Text style={{color: 'black'}}>₱440</Text>
+            <Text style={{color: 'black'}}>
+              ₱{menuContext.state.totalPrice}
+            </Text>
           </View>
           <View style={style.center}>
             <Button>

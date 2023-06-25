@@ -3,6 +3,7 @@ import {createContext, useContext, useReducer} from 'react';
 const menuStateInit: MenuState = {
   itemsOrdered: [],
   totalNumberOfOrder: 0,
+  totalPrice: 0,
 };
 
 const menuValueInit: MenuValue = {
@@ -19,6 +20,9 @@ const MenuReducer = (state: MenuState, action: MenuAction): MenuState => {
         ...state,
         itemsOrdered: action.payload,
         totalNumberOfOrder: action.payload.length,
+        totalPrice: action.payload.reduce((sum, bundle) => {
+          return sum + bundle.count * bundle.price;
+        }, 0),
       };
       return newState;
     }
