@@ -14,8 +14,12 @@ const Search = () => {
           paddingLeft: 10,
           backgroundColor: theme.backShade,
         }}>
-        <SvgXml xml={xml} width={15} height={15} color={'rgba(0, 0, 0, 0.8)'} />
-        <TextInput style={{padding: 5}} placeholder="Search Product" />
+        <SvgXml xml={xml} width={15} height={15} color={theme.text} />
+        <TextInput
+          style={{padding: 5, color: theme.textPrimary}}
+          placeholderTextColor={theme.text}
+          placeholder="Search Product"
+        />
       </View>
     </View>
   );
