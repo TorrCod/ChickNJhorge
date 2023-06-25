@@ -1,0 +1,66 @@
+import {createContext, useContext, useReducer} from 'react';
+
+const menuStateInit: MenuState = {
+  itemsOrdered: [],
+  totalNumberOfOrder: 0,
+};
+
+const menuValueInit: MenuValue = {
+  state: menuStateInit,
+  updateOrderMenu: (item: Item) => {},
+};
+
+const MenuContext = createContext<MenuValue>(menuValueInit);
+
+const MenuReducer = (state: MenuState, action: MenuAction): MenuState => {
+  switch (action.type) {
+    case 'onChangeMenu': {
+      const newState: MenuState = {
+        ...state,
+        itemsOrdered: action.payload,
+        totalNumberOfOrder: action.payload.length,
+      };
+      return newState;
+    }
+
+    default:
+      return state;
+  }
+};
+
+export const MenuWrapper = ({children}: {children: React.ReactNode}) => {
+  const [state, dispatch] = useReducer(MenuReducer, menuStateInit);
+
+  const updateOrderMenu = (item: Item) => {
+    const isExist = state.itemsOrdered.filter(
+      ({name}) => name === item.name,
+    )[0];
+    const itemIndex = state.itemsOrdered.findIndex(
+      ({name}) => name === item.name,
+    );
+    if (!isExist)
+      dispatch({type: 'onChangeMenu', payload: [...state.itemsOrdered, item]});
+    else if (item.count === 0) {
+      const newItemOrdered = [...state.itemsOrdered];
+      newItemOrdered.splice(itemIndex, 1);
+      dispatch({
+        type: 'onChangeMenu',
+        payload: newItemOrdered,
+      });
+    } else {
+      const newItemOrdered = [...state.itemsOrdered];
+      newItemOrdered[itemIndex] = item;
+      dispatch({type: 'onChangeMenu', payload: newItemOrdered});
+    }
+  };
+
+  return (
+    <MenuContext.Provider value={{state, updateOrderMenu}}>
+      {children}
+    </MenuContext.Provider>
+  );
+};
+
+const useMenuContext = () => useContext(MenuContext);
+
+export default useMenuContext;
