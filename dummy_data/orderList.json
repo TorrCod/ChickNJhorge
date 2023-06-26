@@ -1,0 +1,62 @@
+[
+    {
+        "orderId": "123456",
+        "customerName": "John Doe",
+        "date": "2023-06-20",
+        "totalPrice": 50.99
+    },
+    {
+        "orderId": "789012",
+        "customerName": "Jane Smith",
+        "date": "2023-06-21",
+        "totalPrice": 75.5
+    },
+    {
+        "orderId": "345678",
+        "customerName": "Mark Johnson",
+        "date": "2023-06-22",
+        "totalPrice": 120.75
+    },
+    {
+        "orderId": "901234",
+        "customerName": "Emily Davis",
+        "date": "2023-06-23",
+        "totalPrice": 35.25
+    },
+    {
+        "orderId": "567890",
+        "customerName": "Michael Wilson",
+        "date": "2023-06-24",
+        "totalPrice": 90.0
+    },
+    {
+        "orderId": "234567",
+        "customerName": "Sarah Thompson",
+        "date": "2023-06-25",
+        "totalPrice": 65.8
+    },
+    {
+        "orderId": "890123",
+        "customerName": "David Anderson",
+        "date": "2023-06-26",
+        "totalPrice": 105.6
+    },
+    {
+        "orderId": "456789",
+        "customerName": "Jennifer Brown",
+        "date": "2023-06-27",
+        "totalPrice": 43.2
+    },
+    {
+        "orderId": "012345",
+        "customerName": "Christopher Taylor",
+        "date": "2023-06-28",
+        "totalPrice": 80.15
+    },
+    {
+        "orderId": "678901",
+        "customerName": "Jessica Clark",
+        "date": "2023-06-29",
+        "totalPrice": 95.99
+    }
+]
