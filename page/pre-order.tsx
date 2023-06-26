@@ -61,8 +61,8 @@ const PreOrder = ({
           </View> */}
             <LineSpace />
             <View style={style.spaceBetween}>
-              <Text style={{color: 'black'}}>Total</Text>
-              <Text style={{color: 'black'}}>
+              <Text style={{color: theme.textPrimary}}>Total</Text>
+              <Text style={{color: theme.textPrimary}}>
                 ₱{menuContext.state.totalPrice}
               </Text>
             </View>
@@ -84,24 +84,30 @@ const PreOrder = ({
           setModalVisible(!modalVisible);
         }}>
         <View style={{...style.center}}>
-          <View style={preOrderStyle.modalView}>
+          <View
+            style={{
+              ...preOrderStyle.modalView,
+              backgroundColor: theme.backGround,
+            }}>
             <View style={preOrderStyle.modalTitle}>
               <SvgXml xml={checkXml} height={30} width={30} />
               <View>
-                <Text style={style.h2}>Item Ordered</Text>
+                <Text style={{...style.h2, color: theme.textPrimary}}>
+                  Item Ordered
+                </Text>
                 <Text>The Item has been successfully ordered</Text>
               </View>
             </View>
             <View
               style={{
-                backgroundColor: '#f5f5f5',
+                backgroundColor: theme.backShade,
                 alignItems: 'flex-end',
                 paddingHorizontal: 27,
                 paddingVertical: 10,
                 borderBottomLeftRadius: 10,
                 borderBottomRightRadius: 10,
               }}>
-              <View style={{width: 50}}>
+              <View style={{width: 75}}>
                 <Button
                   onPress={() => {
                     setModalVisible(false);
@@ -131,7 +137,6 @@ const checkXml = `
 
 const preOrderStyle = StyleSheet.create({
   modalView: {
-    backgroundColor: 'white',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
