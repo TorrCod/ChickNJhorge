@@ -6,6 +6,15 @@ import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from '../types/navigation';
 import Search from '../component/search';
 import useTheme from '../hooks/useTheme';
+import {
+  Table,
+  TableWrapper,
+  Row,
+  Rows,
+  Col,
+  Cols,
+  Cell,
+} from 'react-native-table-component';
 
 const Orders = ({
   navigation,
@@ -18,6 +27,11 @@ const Orders = ({
       <View>
         <Text style={{color: theme.text}}>Order</Text>
       </View>
+      <Table>
+        <Row
+          data={['Date', 'Customer Name', 'Cashier Name', 'Pesos', 'Action']}
+        />
+      </Table>
     </Layout>
   );
 };
