@@ -71,14 +71,13 @@ const PreOrder = ({
         )}
       </View>
       <Modal
-        animationType="slide"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
           menuContext.clearMenu();
         }}>
-        <View style={{...style.center}}>
+        <View style={{...style.center, backgroundColor: '#00000097'}}>
           <View
             style={{
               ...preOrderStyle.modalView,
