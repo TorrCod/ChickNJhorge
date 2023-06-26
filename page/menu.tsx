@@ -7,16 +7,18 @@ import {RootStackParamList} from '../types/navigation';
 import Search from '../component/search';
 import Product from '../component/product';
 import MenuTitle from '../component/title';
+import useTheme from '../hooks/useTheme';
 
 const Menu = ({
   navigation,
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
+  const theme = useTheme();
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
       <View>
-        <Text>Menu</Text>
+        <Text style={{color: theme.text}}>Menu</Text>
       </View>
       <MenuTitle>Bundles</MenuTitle>
       <View style={menuStyle.productsContainer}>
@@ -27,16 +29,10 @@ const Menu = ({
       </View>
       <MenuTitle>Single Meals</MenuTitle>
       <View style={menuStyle.productsContainer}>
-        <Product
-          name="Chicken W/ Unli Rice"
-          price={79}
-          option={[
-            {label: 'Leg Quarter', value: 'Leg Quarter'},
-            {label: 'Breast', value: 'Breast'},
-          ]}
-        />
+        <Product name="Chicken W/ Unli Rice" price={79} />
         <Product name="2 pcs Chicken W/ Rice" price={80} />
         <Product name="Leg Quarter / Breast Part" price={65} />
+        <View style={{width: 180}}></View>
       </View>
       <MenuTitle>Alacart</MenuTitle>
       <View style={menuStyle.productsContainer}>
@@ -44,29 +40,12 @@ const Menu = ({
         <Product name="Half Chicken" price={120} />
         <Product name="Leg Quarter" price={45} />
         <Product name="Breast Part" price={20} />
-        <Product
-          name="Assorted Part"
-          option={[
-            {label: 'Thigh PArt', value: 'Thigh PArt'},
-            {label: 'Drums Stick', value: 'Drums Stick'},
-            {label: 'Breast Small', value: 'Breast Small'},
-          ]}
-          price={45}
-        />
+        <Product name="Assorted Part" price={45} />
         <Product name="Leeg" price={20} />
       </View>
       <MenuTitle>Drinks</MenuTitle>
       <View style={menuStyle.productsContainer}>
-        <Product
-          name="Soft Drinks"
-          price={20}
-          option={[
-            {label: 'Coke', value: 'Coke'},
-            {label: 'Mountain Dew', value: 'Mountain Dew'},
-            {label: 'Royal', value: 'Royal'},
-            {label: 'Sprite', value: 'Sprite'},
-          ]}
-        />
+        <Product name="Soft Drinks" price={20} />
         <Product name="Ice Tea" price={50} />
       </View>
       <MenuTitle>Addons</MenuTitle>
@@ -84,11 +63,11 @@ const Menu = ({
 
 const menuStyle = StyleSheet.create({
   productsContainer: {
-    ...style.center,
-    flex: 1,
+    display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 3,
+    gap: 5,
+    justifyContent: 'space-evenly',
   },
 });
 

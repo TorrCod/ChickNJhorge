@@ -17,9 +17,11 @@ import Cart from '../component/Cart';
 const Layout = ({
   children,
   onCartPress,
+  cartFocused,
 }: {
   children: ReactNode;
   onCartPress?: () => void;
+  cartFocused?: boolean;
 }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
@@ -35,7 +37,7 @@ const Layout = ({
         <AppTitle />
         <View style={{position: 'absolute', right: 20}}>
           <TouchableOpacity onPress={onCartPress}>
-            <Cart />
+            <Cart isFocused={cartFocused} />
           </TouchableOpacity>
         </View>
       </View>
@@ -43,8 +45,14 @@ const Layout = ({
         contentInsetAdjustmentBehavior="automatic"
         style={{
           ...backgroundStyle,
+          height: '100%',
         }}>
-        <View style={{paddingHorizontal: 5, paddingBottom: 50, paddingTop: 30}}>
+        <View
+          style={{
+            paddingHorizontal: 5,
+            paddingBottom: 48,
+            paddingTop: 30,
+          }}>
           {children}
         </View>
       </ScrollView>

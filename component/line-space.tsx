@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import useTheme from '../hooks/useTheme';
 
 const LineSpace = () => {
-  return <View style={styles.line} />;
+  const theme = useTheme();
+  return <View style={{...styles.line, borderColor: theme.text}} />;
 };
 
 export default LineSpace;

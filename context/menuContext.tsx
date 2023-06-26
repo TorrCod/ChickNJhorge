@@ -3,11 +3,14 @@ import {createContext, useContext, useReducer} from 'react';
 const menuStateInit: MenuState = {
   itemsOrdered: [],
   totalNumberOfOrder: 0,
+  totalPrice: 0,
 };
 
 const menuValueInit: MenuValue = {
   state: menuStateInit,
   updateOrderMenu: (item: Item) => {},
+  onChangeName(name) {},
+  clearMenu() {},
 };
 
 const MenuContext = createContext<MenuValue>(menuValueInit);
@@ -19,12 +22,17 @@ const MenuReducer = (state: MenuState, action: MenuAction): MenuState => {
         ...state,
         itemsOrdered: action.payload,
         totalNumberOfOrder: action.payload.length,
+        totalPrice: action.payload.reduce((sum, bundle) => {
+          return sum + bundle.count * bundle.price;
+        }, 0),
       };
       return newState;
     }
+    case 'onChangeName':
+      return {...state, customerName: action.payload};
 
-    default:
-      return state;
+    case 'clearMenu':
+      return menuStateInit;
   }
 };
 
@@ -38,9 +46,9 @@ export const MenuWrapper = ({children}: {children: React.ReactNode}) => {
     const itemIndex = state.itemsOrdered.findIndex(
       ({name}) => name === item.name,
     );
-    if (!isExist)
+    if (!isExist && item.count > 0)
       dispatch({type: 'onChangeMenu', payload: [...state.itemsOrdered, item]});
-    else if (item.count === 0) {
+    else if (item.count <= 0 && isExist) {
       const newItemOrdered = [...state.itemsOrdered];
       newItemOrdered.splice(itemIndex, 1);
       dispatch({
@@ -54,8 +62,17 @@ export const MenuWrapper = ({children}: {children: React.ReactNode}) => {
     }
   };
 
+  const onChangeName = (name: string) => {
+    dispatch({type: 'onChangeName', payload: name});
+  };
+
+  const clearMenu = () => {
+    dispatch({type: 'clearMenu'});
+  };
+
   return (
-    <MenuContext.Provider value={{state, updateOrderMenu}}>
+    <MenuContext.Provider
+      value={{state, updateOrderMenu, onChangeName, clearMenu}}>
       {children}
     </MenuContext.Provider>
   );

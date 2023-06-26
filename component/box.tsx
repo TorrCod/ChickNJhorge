@@ -1,18 +1,22 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {ReactNode} from 'react';
-import {theme} from '../styles/style';
+import useTheme from '../hooks/useTheme';
 
 type Props = {children: ReactNode};
 
 const Box = ({children}: Props) => {
-  return <View style={styles.box}>{children}</View>;
+  const defaultTheme = useTheme();
+  return (
+    <View style={{...styles.box, backgroundColor: defaultTheme.backShade}}>
+      {children}
+    </View>
+  );
 };
 
 export default Box;
 
 const styles = StyleSheet.create({
   box: {
-    backgroundColor: theme.backgroundColor,
     padding: 20,
     borderRadius: 10,
   },
