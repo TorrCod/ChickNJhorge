@@ -23,8 +23,6 @@ const PreOrder = ({
   const theme = useTheme();
 
   const handlePlaceOrder = () => {
-    menuContext.clearMenu();
-    // navigation.navigate('Menu');
     setModalVisible(true);
   };
 
@@ -82,6 +80,7 @@ const PreOrder = ({
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
+          menuContext.clearMenu();
         }}>
         <View style={{...style.center}}>
           <View
