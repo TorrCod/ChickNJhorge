@@ -26,7 +26,7 @@ const CustomerName = (props: Props) => {
           onChangeText={props.onChangeName}
           placeholderTextColor={theme.text}
         />
-        <Text>Cashier Name</Text>
+        <Text style={{color: theme.text}}>Cashier Name</Text>
       </View>
       <View>
         <SvgXml color={theme.text} xml={editNameXml} height={30} width={30} />

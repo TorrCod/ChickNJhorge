@@ -53,10 +53,6 @@ const PreOrder = ({
         </Box>
         {menuContext.state.itemsOrdered.length != 0 && (
           <Box>
-            {/* <View style={style.spaceBetween}>
-            <Text>Subtotal</Text>
-            <Text>₱400</Text>
-          </View> */}
             <LineSpace />
             <View style={style.spaceBetween}>
               <Text style={{color: theme.textPrimary}}>Total</Text>
