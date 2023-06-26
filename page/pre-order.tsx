@@ -109,8 +109,9 @@ const PreOrder = ({
               <View style={{width: 75}}>
                 <Button
                   onPress={() => {
-                    setModalVisible(false);
+                    menuContext.clearMenu();
                     navigation.navigate('Menu');
+                    setModalVisible(false);
                   }}>
                   <Text style={{color: 'white'}}>Ok</Text>
                 </Button>
