@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React, {ReactNode} from 'react';
 import {style} from '../styles/style';
+import useTheme from '../hooks/useTheme';
 
 type Props = {
   children: ReactNode;
@@ -14,8 +15,11 @@ type Props = {
 };
 
 const Button = ({children, onPress}: Props) => {
+  const theme = useTheme();
   return (
-    <TouchableOpacity onPress={onPress} style={{...style.button}}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{...style.button, backgroundColor: theme.primary}}>
       {children}
     </TouchableOpacity>
   );
