@@ -27,10 +27,10 @@ type ActionProps = {
     keyof RootStackParamList,
     undefined
   >;
-  itemId: ReactNode;
+  orderId: ReactNode;
 };
 
-const Action = ({navigation, itemId}: ActionProps) => {
+const Action = ({navigation, orderId}: ActionProps) => {
   const theme = useTheme();
   const handleOnPress = () => {};
   return (
@@ -54,7 +54,7 @@ const Orders = ({
     setData(
       orderToTableData(fetchedData).map(val => {
         const newVal = val.slice(1);
-        newVal.push(<Action navigation={navigation} itemId={val[0]} />);
+        newVal.push(<Action navigation={navigation} orderId={val[0]} />);
         return newVal;
       }),
     );
