@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import Menu from './page/menu';
 import Orders from './page/orders';
+import ViewOrder from './page/view-order';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SvgXml} from 'react-native-svg';
 import Transactions from './page/transaction';
@@ -90,6 +91,16 @@ const NavScreen = () => {
         <Tab.Screen
           name="PreOrder"
           component={PreOrder}
+          options={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarButton: () => null,
+            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+          }}
+        />
+        <Tab.Screen
+          name="ViewOrder"
+          component={ViewOrder}
           options={{
             headerShown: false,
             tabBarShowLabel: false,

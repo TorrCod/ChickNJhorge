@@ -32,7 +32,9 @@ type ActionProps = {
 
 const Action = ({navigation, orderId}: ActionProps) => {
   const theme = useTheme();
-  const handleOnPress = () => {};
+  const handleOnPress = () => {
+    navigation.navigate('ViewOrder');
+  };
   return (
     <TouchableOpacity onPress={handleOnPress}>
       <Text style={{color: theme.text, ...styles.changeOrder}}>
