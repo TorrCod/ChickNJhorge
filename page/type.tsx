@@ -1,7 +1,10 @@
+import {ReactNode} from 'react';
+
 export type OrderData = {
   orderId: string;
   date: string;
   customerName: string;
-  peso: number;
+  sales: number;
   cashierName: string;
+  action?: ReactNode;
 };
