@@ -4,8 +4,8 @@ export function orderToTableData(orderData: OrderData[]) {
   const twoDArray: (string | number | React.ReactNode)[][] = [];
 
   orderData.forEach(order => {
-    const {date, customerName, peso, cashierName, orderId} = order;
-    const orderArray = [orderId, date, customerName, cashierName, peso];
+    const {date, customerName, sales, cashierName, orderId} = order;
+    const orderArray = [orderId, date, customerName, cashierName, sales];
     twoDArray.push(orderArray);
   });
 
