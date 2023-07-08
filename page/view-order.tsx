@@ -1,11 +1,18 @@
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  useColorScheme,
+} from 'react-native';
 import {RootStackParamList} from '../types/navigation';
-import Layout from '../layout/layout';
 import useTheme from '../hooks/useTheme';
-import Search from '../component/search';
-import {style} from '../styles/style';
 import {SvgXml} from 'react-native-svg';
+import {Row, Table} from 'react-native-reanimated-table';
+import Button from '../component/button';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 export default ({
   navigation,
@@ -15,66 +22,115 @@ export default ({
   const onPressBack = () => {
     navigation.navigate('Order');
   };
+  const isDarkMode = useColorScheme() === 'dark';
+  const backgroundStyle = {
+    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  };
   return (
-    <View style={styles.screen}>
-      <View style={styles.headNav}>
-        <TouchableOpacity onPress={onPressBack}>
-          <SvgXml
-            color={theme.textPrimary}
-            fill={theme.textPrimary}
-            xml={backIconXml}
-            width={25}
-            height={25}
-          />
-        </TouchableOpacity>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      style={{
+        ...backgroundStyle,
+        height: '100%',
+      }}>
+      <View
+        style={{
+          ...styles.screen,
+        }}>
+        <View style={styles.headNav}>
+          <TouchableOpacity onPress={onPressBack}>
+            <SvgXml
+              color={theme.textPrimary}
+              fill={theme.textPrimary}
+              xml={backIconXml}
+              width={25}
+              height={25}
+            />
+          </TouchableOpacity>
 
-        <Text style={{color: theme.textPrimary, ...styles.head}}>
-          View Order {'>'} OrderId
-        </Text>
-      </View>
-      <View style={{...styles.mainContainer, backgroundColor: theme.backShade}}>
-        <Text
-          style={{
-            color: theme.textPrimary,
-            ...styles.head,
-          }}>
-          Order Details
-        </Text>
-        <View style={{...styles.container}}>
-          <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>
-              Reference No.
-            </Text>
-            <Text style={{color: theme.textPrimary}}>21654981231842181</Text>
+          <Text style={{color: theme.textPrimary, ...styles.head}}>
+            View Order {'>'} OrderId
+          </Text>
+        </View>
+        <View
+          style={{...styles.mainContainer, backgroundColor: theme.backShade}}>
+          <Text
+            style={{
+              color: theme.textPrimary,
+              ...styles.head,
+            }}>
+            Order Details
+          </Text>
+          <View style={{...styles.container}}>
+            <View style={styles.item}>
+              <Text style={{color: theme.text, ...styles.tag}}>
+                Reference No.
+              </Text>
+              <Text style={{color: theme.textPrimary}}>21654981231842181</Text>
+            </View>
+
+            <View style={styles.item}>
+              <Text style={{color: theme.text, ...styles.tag}}>Customer</Text>
+              <Text style={{color: theme.textPrimary}}>Paolo Kempis</Text>
+            </View>
+
+            <View style={styles.item}>
+              <Text style={{color: theme.text, ...styles.tag}}>Total</Text>
+              <Text style={{color: theme.textPrimary}}>₱300.00</Text>
+            </View>
+
+            <View style={styles.item}>
+              <Text style={{color: theme.text, ...styles.tag}}>Cashier</Text>
+              <Text style={{color: theme.textPrimary}}>Jhorginia Kempis</Text>
+            </View>
+
+            <View style={styles.item}>
+              <Text style={{color: theme.text, ...styles.tag}}>Date</Text>
+              <Text style={{color: theme.textPrimary}}>18/06/2023</Text>
+            </View>
+
+            <View style={styles.item}>
+              <Text style={{color: theme.text, ...styles.tag}}>Time</Text>
+              <Text style={{color: theme.textPrimary}}>6:23:32 am</Text>
+            </View>
           </View>
 
-          <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>Customer</Text>
-            <Text style={{color: theme.textPrimary}}>Paolo Kempis</Text>
-          </View>
+          <Table style={styles.tableContainer}>
+            <Row
+              style={{...styles.tableHead, borderBottomColor: theme.text}}
+              textStyle={{textAlign: 'center', color: theme.text}}
+              data={['Items', 'Qty', 'Price']}
+            />
+            <Row
+              textStyle={{textAlign: 'center', color: theme.textPrimary}}
+              data={['Item1', 'x1', '100.00']}
+            />
+            <Row
+              textStyle={{textAlign: 'center', color: theme.textPrimary}}
+              data={['Item2', 'x1', '100.00']}
+            />
+            <Row
+              textStyle={{textAlign: 'center', color: theme.textPrimary}}
+              data={['Item3', 'x1', '100.00']}
+            />
+          </Table>
 
-          <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>Total</Text>
-            <Text style={{color: theme.textPrimary}}>₱300.00</Text>
-          </View>
-
-          <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>Cashier</Text>
-            <Text style={{color: theme.textPrimary}}>Jhorginia Kempis</Text>
-          </View>
-
-          <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>Date</Text>
-            <Text style={{color: theme.textPrimary}}>18/06/2023</Text>
-          </View>
-
-          <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>Time</Text>
-            <Text style={{color: theme.textPrimary}}>6:23:32 am</Text>
+          <View
+            style={{
+              alignItems: 'flex-end',
+              width: '100%',
+            }}>
+            <View style={{width: 150}}>
+              <Button onPress={() => {}}>
+                <Text style={{color: 'rgba(255,255,255,0.8)'}}>
+                  Change Order
+                </Text>
+              </Button>
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -107,4 +163,6 @@ const styles = StyleSheet.create({
     width: '50%',
     height: 50,
   },
+  tableContainer: {gap: 20},
+  tableHead: {borderBottomWidth: 2},
 });
