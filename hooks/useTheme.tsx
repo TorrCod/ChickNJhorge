@@ -20,7 +20,6 @@ const useTheme = () => {
         text: 'rgba(255, 255, 255, 0.5)',
         textPrimary: 'rgba(255, 255, 255,1)',
         backGround: Colors.darker,
-        primary: '#835d25',
       });
     else setTheme(themeInit);
   }, [isDarkMode]);
