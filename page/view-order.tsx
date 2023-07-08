@@ -3,6 +3,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
   useColorScheme,
@@ -13,6 +14,10 @@ import {SvgXml} from 'react-native-svg';
 import {Row, Table} from 'react-native-reanimated-table';
 import Button from '../component/button';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useState} from 'react';
+import {style} from '../styles/style';
+import Modal from '../component/modal';
+import Input from '../component/Input';
 
 export default ({
   navigation,
@@ -26,6 +31,7 @@ export default ({
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
@@ -121,7 +127,7 @@ export default ({
               width: '100%',
             }}>
             <View style={{width: 150}}>
-              <Button onPress={() => {}}>
+              <Button onPress={() => setModalVisible(true)}>
                 <Text style={{color: 'rgba(255,255,255,0.8)'}}>
                   Change Order
                 </Text>
@@ -130,6 +136,18 @@ export default ({
           </View>
         </View>
       </View>
+      <Modal
+        title="Confirm Change Order"
+        modalVisible={modalVisible}
+        onOk={() => setModalVisible(false)}
+        onCancel={() => setModalVisible(false)}>
+        <View style={{gap: 5}}>
+          <Text style={{color: theme.text}}>Input Pin</Text>
+          <View style={{height: 30, width: 250}}>
+            <Input placeHolder="PIN" />
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
