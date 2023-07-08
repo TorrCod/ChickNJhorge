@@ -49,23 +49,23 @@ export default ({
           </View>
 
           <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>Total</Text>
-            <Text style={{color: theme.textPrimary}}>₱300.00</Text>
-          </View>
-
-          <View style={styles.item}>
-            <Text style={{color: theme.text, ...styles.tag}}>Date</Text>
-            <Text style={{color: theme.textPrimary}}>18/06/2023</Text>
-          </View>
-
-          <View style={styles.item}>
             <Text style={{color: theme.text, ...styles.tag}}>Customer</Text>
             <Text style={{color: theme.textPrimary}}>Paolo Kempis</Text>
           </View>
 
           <View style={styles.item}>
+            <Text style={{color: theme.text, ...styles.tag}}>Total</Text>
+            <Text style={{color: theme.textPrimary}}>₱300.00</Text>
+          </View>
+
+          <View style={styles.item}>
             <Text style={{color: theme.text, ...styles.tag}}>Cashier</Text>
             <Text style={{color: theme.textPrimary}}>Jhorginia Kempis</Text>
+          </View>
+
+          <View style={styles.item}>
+            <Text style={{color: theme.text, ...styles.tag}}>Date</Text>
+            <Text style={{color: theme.textPrimary}}>18/06/2023</Text>
           </View>
 
           <View style={styles.item}>
