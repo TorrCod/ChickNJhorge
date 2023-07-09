@@ -32,6 +32,13 @@ export default ({
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   const [modalVisible, setModalVisible] = useState(false);
+  const [onSuccess, setOnSuccess] = useState(false);
+
+  const handlePinOk = () => {
+    setModalVisible(false);
+    setOnSuccess(true);
+  };
+
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
@@ -102,23 +109,111 @@ export default ({
           </View>
 
           <Table style={styles.tableContainer}>
-            <Row
-              style={{...styles.tableHead, borderBottomColor: theme.text}}
-              textStyle={{textAlign: 'center', color: theme.text}}
-              data={['Items', 'Qty', 'Price']}
-            />
-            <Row
-              textStyle={{textAlign: 'center', color: theme.textPrimary}}
-              data={['Item1', 'x1', '100.00']}
-            />
-            <Row
-              textStyle={{textAlign: 'center', color: theme.textPrimary}}
-              data={['Item2', 'x1', '100.00']}
-            />
-            <Row
-              textStyle={{textAlign: 'center', color: theme.textPrimary}}
-              data={['Item3', 'x1', '100.00']}
-            />
+            {onSuccess ? (
+              <>
+                <Row
+                  style={{...styles.tableHead, borderBottomColor: theme.text}}
+                  textStyle={{textAlign: 'center', color: theme.text}}
+                  data={['Items', 'Qty', 'Price']}
+                />
+                <Row
+                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
+                  data={[
+                    <View
+                      style={{
+                        alignSelf: 'center',
+                        flexDirection: 'row',
+                        gap: 5,
+                      }}>
+                      <TouchableOpacity>
+                        <SvgXml xml={minusIconXml} width={20} height={20} />
+                      </TouchableOpacity>
+                      <Text style={{color: theme.textPrimary}}>Item1</Text>
+                    </View>,
+                    ,
+                    'x1',
+                    '100.00',
+                  ]}
+                />
+                <Row
+                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
+                  data={[
+                    <View
+                      style={{
+                        alignSelf: 'center',
+                        flexDirection: 'row',
+                        gap: 5,
+                      }}>
+                      <TouchableOpacity>
+                        <SvgXml xml={minusIconXml} width={20} height={20} />
+                      </TouchableOpacity>
+                      <Text style={{color: theme.textPrimary}}>Item2</Text>
+                    </View>,
+                    ,
+                    'x1',
+                    '100.00',
+                  ]}
+                />
+                <Row
+                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
+                  data={[
+                    <View
+                      style={{
+                        alignSelf: 'center',
+                        flexDirection: 'row',
+                        gap: 5,
+                      }}>
+                      <TouchableOpacity>
+                        <SvgXml xml={minusIconXml} width={20} height={20} />
+                      </TouchableOpacity>
+                      <Text style={{color: theme.textPrimary}}>Item3</Text>
+                    </View>,
+                    ,
+                    'x1',
+                    '100.00',
+                  ]}
+                />
+
+                <Row
+                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
+                  data={[
+                    <View
+                      style={{
+                        alignSelf: 'center',
+                        flexDirection: 'row',
+                        gap: 5,
+                      }}>
+                      <TouchableOpacity>
+                        <SvgXml xml={addIconXml} width={20} height={20} />
+                      </TouchableOpacity>
+                    </View>,
+                    ,
+                    '',
+                    '',
+                  ]}
+                />
+              </>
+            ) : (
+              <>
+                <Row
+                  style={{...styles.tableHead, borderBottomColor: theme.text}}
+                  textStyle={{textAlign: 'center', color: theme.text}}
+                  data={['Items', 'Qty', 'Price']}
+                />
+                <Row
+                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
+                  data={['Item1', 'x1', '100.00']}
+                />
+                <Row
+                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
+                  data={['Item2', 'x1', '100.00']}
+                />
+                <Row
+                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
+                  data={['Item3', 'x1', '100.00']}
+                />
+              </>
+            )}
           </Table>
 
           <View
@@ -127,11 +222,22 @@ export default ({
               width: '100%',
             }}>
             <View style={{width: 150}}>
-              <Button onPress={() => setModalVisible(true)}>
-                <Text style={{color: 'rgba(255,255,255,0.8)'}}>
-                  Change Order
-                </Text>
-              </Button>
+              {onSuccess ? (
+                <View style={{flexDirection: 'row', gap: 5}}>
+                  <Button onPress={() => setOnSuccess(false)} type="secondary">
+                    <Text style={{color: theme.textPrimary}}>Cancel</Text>
+                  </Button>
+                  <Button onPress={() => setOnSuccess(false)}>
+                    <Text style={{color: 'rgba(255,255,255,0.8)'}}>Save</Text>
+                  </Button>
+                </View>
+              ) : (
+                <Button onPress={() => setModalVisible(true)}>
+                  <Text style={{color: 'rgba(255,255,255,0.8)'}}>
+                    Change Order
+                  </Text>
+                </Button>
+              )}
             </View>
           </View>
         </View>
@@ -139,7 +245,7 @@ export default ({
       <Modal
         title="Confirm Change Order"
         modalVisible={modalVisible}
-        onOk={() => setModalVisible(false)}
+        onOk={handlePinOk}
         onCancel={() => setModalVisible(false)}>
         <View style={{gap: 5}}>
           <Text style={{color: theme.text}}>Input Pin</Text>
@@ -153,6 +259,16 @@ export default ({
 };
 
 const backIconXml = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>`;
+const minusIconXml = `<svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="22" height="20" rx="4.5" stroke="black" stroke-opacity="0.7"/>
+<line x1="4" y1="10.5" x2="19" y2="10.5" stroke="black" stroke-opacity="0.7"/>
+</svg>`;
+const addIconXml = `<svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="0.5" width="22" height="20" rx="4.5" stroke="black" stroke-opacity="0.7"/>
+<line x1="11.5" y1="3" x2="11.5" y2="18" stroke="black" stroke-opacity="0.7"/>
+<line x1="4" y1="10.5" x2="19" y2="10.5" stroke="black" stroke-opacity="0.7"/>
+</svg>
+`;
 
 const styles = StyleSheet.create({
   mainContainer: {
