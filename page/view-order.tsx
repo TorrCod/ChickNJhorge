@@ -14,7 +14,7 @@ import {SvgXml} from 'react-native-svg';
 import {Row, Table} from 'react-native-reanimated-table';
 import Button from '../component/button';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {style} from '../styles/style';
 import Modal from '../component/modal';
 import Input from '../component/Input';
@@ -35,11 +35,17 @@ export default ({
   const [modalVisible, setModalVisible] = useState(false);
   const [onSuccess, setOnSuccess] = useState(false);
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', () =>
+      setOnSuccess(false),
+    );
+    return unsubscribe;
+  }, [navigation]);
+
   const handlePinOk = () => {
     setModalVisible(false);
     setOnSuccess(true);
   };
-
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"

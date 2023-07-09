@@ -6,7 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {SvgXml} from 'react-native-svg';
 import Transactions from './page/transaction';
 import Profile from './page/profile';
-import {View, useColorScheme} from 'react-native';
+import {StyleSheet, View, useColorScheme} from 'react-native';
 import PreOrder from './page/pre-order';
 import {RootStackParamList} from './types/navigation';
 import {MenuWrapper} from './context/menuContext';
@@ -30,6 +30,10 @@ const NavScreen = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const styles = StyleSheet.create({
+    bottomTabBar: {height: 39, backgroundColor: theme.backShade},
+  });
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -46,10 +50,7 @@ const NavScreen = () => {
               <TabBarIcon {...tabBarProps} xml={menuSvg} />
             ),
             tabBarShowLabel: false,
-            tabBarStyle: {
-              height: 39,
-              backgroundColor: theme.backShade,
-            },
+            tabBarStyle: styles.bottomTabBar,
           }}
         />
         <Tab.Screen
@@ -61,7 +62,7 @@ const NavScreen = () => {
               <TabBarIcon {...tabBarProps} xml={orderSvg} />
             ),
             tabBarShowLabel: false,
-            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+            tabBarStyle: styles.bottomTabBar,
           }}
         />
         <Tab.Screen
@@ -73,7 +74,7 @@ const NavScreen = () => {
               <TabBarIcon {...tabBarProps} xml={transactionSvg} />
             ),
             tabBarShowLabel: false,
-            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+            tabBarStyle: styles.bottomTabBar,
           }}
         />
         <Tab.Screen
@@ -85,7 +86,7 @@ const NavScreen = () => {
               <TabBarIcon {...tabBarProps} xml={profileSvg} />
             ),
             tabBarShowLabel: false,
-            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+            tabBarStyle: styles.bottomTabBar,
           }}
         />
         <Tab.Screen
@@ -95,17 +96,17 @@ const NavScreen = () => {
             headerShown: false,
             tabBarShowLabel: false,
             tabBarButton: () => null,
-            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+            tabBarStyle: styles.bottomTabBar,
           }}
         />
         <Tab.Screen
           name="ViewOrder"
-          component={ViewOrder}
+          getComponent={() => require('./page/view-order').default}
           options={{
             headerShown: false,
             tabBarShowLabel: false,
             tabBarButton: () => null,
-            tabBarStyle: {height: 39, backgroundColor: theme.backShade},
+            tabBarStyle: styles.bottomTabBar,
           }}
         />
       </Tab.Navigator>
