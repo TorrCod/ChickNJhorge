@@ -49,7 +49,7 @@ const Action = ({
   };
   return (
     <TouchableOpacity onPress={handleOnPress}>
-      <Text style={{color: theme.text, ...styles.changeOrder}}>
+      <Text style={{color: theme.textPrimary, ...styles.changeOrder}}>
         Change Order
       </Text>
     </TouchableOpacity>
@@ -95,7 +95,10 @@ const Orders = ({
           textStyle={{...styles.text, color: '#e4e4e4'}}
           style={{backgroundColor: theme.primary}}
         />
-        <Rows textStyle={{...styles.text, color: theme.text}} data={data} />
+        <Rows
+          textStyle={{...styles.text, color: theme.textPrimary}}
+          data={data}
+        />
       </Table>
     </Layout>
   );
