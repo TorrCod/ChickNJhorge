@@ -6,5 +6,13 @@ export type RootStackParamList = {
   Transaction: undefined;
   Profile: undefined;
   PreOrder: undefined;
-  ViewOrder: undefined;
+  ViewOrder: OrderType;
+};
+
+export type OrderType = {
+  refNo: string;
+  customerName: string;
+  cashierName: string;
+  time: string;
+  date: string;
 };

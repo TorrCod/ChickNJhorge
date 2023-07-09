@@ -24,6 +24,7 @@ export default ({
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
   const theme = useTheme();
+  const params = route.params;
   const onPressBack = () => {
     navigation.navigate('Order');
   };
@@ -62,7 +63,7 @@ export default ({
           </TouchableOpacity>
 
           <Text style={{color: theme.textPrimary, ...styles.head}}>
-            View Order {'>'} OrderId
+            View Order {'>'} {params?.refNo}
           </Text>
         </View>
         <View
@@ -79,12 +80,14 @@ export default ({
               <Text style={{color: theme.text, ...styles.tag}}>
                 Reference No.
               </Text>
-              <Text style={{color: theme.textPrimary}}>21654981231842181</Text>
+              <Text style={{color: theme.textPrimary}}>{params?.refNo}</Text>
             </View>
 
             <View style={styles.item}>
               <Text style={{color: theme.text, ...styles.tag}}>Customer</Text>
-              <Text style={{color: theme.textPrimary}}>Paolo Kempis</Text>
+              <Text style={{color: theme.textPrimary}}>
+                {params?.customerName}
+              </Text>
             </View>
 
             <View style={styles.item}>
@@ -94,17 +97,19 @@ export default ({
 
             <View style={styles.item}>
               <Text style={{color: theme.text, ...styles.tag}}>Cashier</Text>
-              <Text style={{color: theme.textPrimary}}>Jhorginia Kempis</Text>
+              <Text style={{color: theme.textPrimary}}>
+                {params?.cashierName}
+              </Text>
             </View>
 
             <View style={styles.item}>
               <Text style={{color: theme.text, ...styles.tag}}>Date</Text>
-              <Text style={{color: theme.textPrimary}}>18/06/2023</Text>
+              <Text style={{color: theme.textPrimary}}>{params?.date}</Text>
             </View>
 
             <View style={styles.item}>
               <Text style={{color: theme.text, ...styles.tag}}>Time</Text>
-              <Text style={{color: theme.textPrimary}}>6:23:32 am</Text>
+              <Text style={{color: theme.textPrimary}}>{params?.time}</Text>
             </View>
           </View>
 

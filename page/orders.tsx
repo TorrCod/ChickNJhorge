@@ -6,7 +6,7 @@ import {
   BottomTabNavigationProp,
   BottomTabScreenProps,
 } from '@react-navigation/bottom-tabs';
-import {RootStackParamList} from '../types/navigation';
+import {OrderType, RootStackParamList} from '../types/navigation';
 import Search from '../component/search';
 import useTheme from '../hooks/useTheme';
 import {
@@ -27,13 +27,25 @@ type ActionProps = {
     keyof RootStackParamList,
     undefined
   >;
-  orderId: ReactNode;
-};
+} & OrderType;
 
-const Action = ({navigation, orderId}: ActionProps) => {
+const Action = ({
+  navigation,
+  refNo,
+  cashierName,
+  customerName,
+  time,
+  date,
+}: ActionProps) => {
   const theme = useTheme();
   const handleOnPress = () => {
-    navigation.navigate('ViewOrder');
+    navigation.navigate('ViewOrder', {
+      refNo,
+      cashierName,
+      customerName,
+      time,
+      date,
+    });
   };
   return (
     <TouchableOpacity onPress={handleOnPress}>
@@ -55,9 +67,18 @@ const Orders = ({
     const fetchedData = dummyData;
     setData(
       orderToTableData(fetchedData).map(val => {
-        const newVal = val.slice(1);
-        newVal.push(<Action navigation={navigation} orderId={val[0]} />);
-        return newVal;
+        const newVal = val.slice(2);
+        newVal.push(
+          <Action
+            navigation={navigation}
+            refNo={val[0]}
+            customerName={val[3]}
+            time={val[1]}
+            cashierName={val[4]}
+            date={val[2]}
+          />,
+        );
+        return newVal.filter(val => val);
       }),
     );
   }, []);
@@ -96,6 +117,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-20',
     sales: 50.99,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '789012',
@@ -103,6 +125,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-21',
     sales: 75.5,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '345678',
@@ -110,6 +133,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-22',
     sales: 120.75,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '901234',
@@ -117,6 +141,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-23',
     sales: 35.25,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '567890',
@@ -124,6 +149,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-24',
     sales: 90.0,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '234567',
@@ -131,6 +157,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-25',
     sales: 65.8,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '890123',
@@ -138,6 +165,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-26',
     sales: 105.6,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '456789',
@@ -145,6 +173,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-27',
     sales: 43.2,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '012345',
@@ -152,6 +181,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-28',
     sales: 80.15,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
   {
     orderId: '678901',
@@ -159,6 +189,7 @@ const dummyData: OrderData[] = [
     date: '2023-06-29',
     sales: 95.99,
     cashierName: 'Jhorgina Comia',
+    time: '8:30pm',
   },
 ];
 
