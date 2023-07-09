@@ -17,4 +17,5 @@ type MenuValue = {
   updateOrderMenu: (item: Item) => void;
   onChangeName: (name: string) => void;
   clearMenu: () => void;
+  getProductCount: (name: string) => number;
 };

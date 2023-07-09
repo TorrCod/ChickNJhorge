@@ -11,6 +11,9 @@ const menuValueInit: MenuValue = {
   updateOrderMenu: (item: Item) => {},
   onChangeName(name) {},
   clearMenu() {},
+  getProductCount(name) {
+    return 0;
+  },
 };
 
 const MenuContext = createContext<MenuValue>(menuValueInit);
@@ -70,9 +73,18 @@ export const MenuWrapper = ({children}: {children: React.ReactNode}) => {
     dispatch({type: 'clearMenu'});
   };
 
+  const getProductCount = (name: string) =>
+    state.itemsOrdered.filter(item => item.name === name)[0]?.count ?? 0;
+
   return (
     <MenuContext.Provider
-      value={{state, updateOrderMenu, onChangeName, clearMenu}}>
+      value={{
+        state,
+        updateOrderMenu,
+        onChangeName,
+        clearMenu,
+        getProductCount,
+      }}>
       {children}
     </MenuContext.Provider>
   );

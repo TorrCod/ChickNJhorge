@@ -9,18 +9,30 @@ type Props = {
   name: string;
   price: number;
   count?: number;
+  onAddItem: (val: {name: string; price: number}) => void;
+  onRemoveItem: (val: {name: string; price: number}) => void;
+  productCount: number;
 };
 
-const Product = ({name, price}: Props) => {
-  const {updateOrderMenu, state} = useMenuContext();
-  const productCount =
-    state.itemsOrdered.filter(item => item.name === name)[0]?.count ?? 0;
-  const addHandle = () =>
-    updateOrderMenu({name, price, count: productCount + 1});
-  const minusHandle = () => {
-    const newCount = productCount - 1;
-    updateOrderMenu({name, price, count: newCount > 0 ? newCount : 0});
-  };
+const Product = ({
+  name,
+  price,
+  onAddItem,
+  onRemoveItem,
+  productCount,
+}: Props) => {
+  // const {updateOrderMenu, state} = useMenuContext();
+  // const productCount =
+  //   state.itemsOrdered.filter(item => item.name === name)[0]?.count ?? 0;
+  // const addHandle = () =>
+  //   updateOrderMenu({name, price, count: productCount + 1});
+  // const minusHandle = () => {
+  //   const newCount = productCount - 1;
+  //   updateOrderMenu({name, price, count: newCount > 0 ? newCount : 0});
+  // };
+
+  const addHandle = () => onAddItem?.({name, price});
+  const minusHandle = () => onRemoveItem?.({name, price});
   const theme = useTheme();
 
   return (

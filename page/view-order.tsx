@@ -1,5 +1,6 @@
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {
+  DrawerLayoutAndroid,
   ScrollView,
   StyleSheet,
   Text,
@@ -14,10 +15,14 @@ import {SvgXml} from 'react-native-svg';
 import {Row, Table} from 'react-native-reanimated-table';
 import Button from '../component/button';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {style} from '../styles/style';
 import Modal from '../component/modal';
 import Input from '../component/Input';
+import Product from '../component/product';
+import MenuTitle from '../component/title';
+import {MenuDummy} from './menu';
+import useMenuContext from '../context/menuContext';
 
 export default ({
   navigation,
@@ -34,6 +39,8 @@ export default ({
   };
   const [modalVisible, setModalVisible] = useState(false);
   const [onSuccess, setOnSuccess] = useState(false);
+  const drawerRef = useRef<DrawerLayoutAndroid>(null);
+  const {getProductCount} = useMenuContext();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', () =>
@@ -46,228 +53,317 @@ export default ({
     setModalVisible(false);
     setOnSuccess(true);
   };
-  return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={{
-        ...backgroundStyle,
-        height: '100%',
-      }}>
-      <View
-        style={{
-          ...styles.screen,
-        }}>
-        <View style={styles.headNav}>
-          <TouchableOpacity onPress={onPressBack}>
-            <SvgXml
-              color={theme.textPrimary}
-              fill={theme.textPrimary}
-              xml={backIconXml}
-              width={25}
-              height={25}
-            />
-          </TouchableOpacity>
 
-          <Text style={{color: theme.textPrimary, ...styles.head}}>
-            View Order {'>'} {params?.refNo}
-          </Text>
+  const onAddItem = ({name, price}: {name: string; price: number}) => {};
+  const onRemoveItem = ({name, price}: {name: string; price: number}) => {};
+
+  const drawerView = () => (
+    <ScrollView>
+      <View style={{padding: 15}}>
+        <View>
+          <Text style={{color: theme.textPrimary, fontSize: 16}}>Menu</Text>
         </View>
-        <View
-          style={{...styles.mainContainer, backgroundColor: theme.backShade}}>
-          <Text
-            style={{
-              color: theme.textPrimary,
-              ...styles.head,
-            }}>
-            Order Details
-          </Text>
-          <View style={{...styles.container}}>
-            <View style={styles.item}>
-              <Text style={{color: theme.text, ...styles.tag}}>
-                Reference No.
-              </Text>
-              <Text style={{color: theme.textPrimary}}>{params?.refNo}</Text>
-            </View>
-
-            <View style={styles.item}>
-              <Text style={{color: theme.text, ...styles.tag}}>Customer</Text>
-              <Text style={{color: theme.textPrimary}}>
-                {params?.customerName}
-              </Text>
-            </View>
-
-            <View style={styles.item}>
-              <Text style={{color: theme.text, ...styles.tag}}>Total</Text>
-              <Text style={{color: theme.textPrimary}}>₱300.00</Text>
-            </View>
-
-            <View style={styles.item}>
-              <Text style={{color: theme.text, ...styles.tag}}>Cashier</Text>
-              <Text style={{color: theme.textPrimary}}>
-                {params?.cashierName}
-              </Text>
-            </View>
-
-            <View style={styles.item}>
-              <Text style={{color: theme.text, ...styles.tag}}>Date</Text>
-              <Text style={{color: theme.textPrimary}}>{params?.date}</Text>
-            </View>
-
-            <View style={styles.item}>
-              <Text style={{color: theme.text, ...styles.tag}}>Time</Text>
-              <Text style={{color: theme.textPrimary}}>{params?.time}</Text>
+        {MenuDummy.map(({section, menu}, index) => (
+          <View key={index}>
+            <MenuTitle>{section}</MenuTitle>
+            <View style={menuStyle.productsContainer}>
+              {menu.map(component => (
+                <Product
+                  name={component.name}
+                  price={component.price}
+                  onAddItem={onAddItem}
+                  onRemoveItem={onRemoveItem}
+                  productCount={getProductCount(component.name)}
+                  key={component.name + ' ' + index}
+                />
+              ))}
             </View>
           </View>
-
-          <Table style={styles.tableContainer}>
-            {onSuccess ? (
-              <>
-                <Row
-                  style={{...styles.tableHead, borderBottomColor: theme.text}}
-                  textStyle={{textAlign: 'center', color: theme.text}}
-                  data={['Items', 'Qty', 'Price']}
-                />
-                <Row
-                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
-                  data={[
-                    <View
-                      style={{
-                        alignSelf: 'center',
-                        flexDirection: 'row',
-                        gap: 5,
-                      }}>
-                      <TouchableOpacity>
-                        <SvgXml xml={minusIconXml} width={20} height={20} />
-                      </TouchableOpacity>
-                      <Text style={{color: theme.textPrimary}}>Item1</Text>
-                    </View>,
-                    ,
-                    'x1',
-                    '100.00',
-                  ]}
-                />
-                <Row
-                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
-                  data={[
-                    <View
-                      style={{
-                        alignSelf: 'center',
-                        flexDirection: 'row',
-                        gap: 5,
-                      }}>
-                      <TouchableOpacity>
-                        <SvgXml xml={minusIconXml} width={20} height={20} />
-                      </TouchableOpacity>
-                      <Text style={{color: theme.textPrimary}}>Item2</Text>
-                    </View>,
-                    ,
-                    'x1',
-                    '100.00',
-                  ]}
-                />
-                <Row
-                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
-                  data={[
-                    <View
-                      style={{
-                        alignSelf: 'center',
-                        flexDirection: 'row',
-                        gap: 5,
-                      }}>
-                      <TouchableOpacity>
-                        <SvgXml xml={minusIconXml} width={20} height={20} />
-                      </TouchableOpacity>
-                      <Text style={{color: theme.textPrimary}}>Item3</Text>
-                    </View>,
-                    ,
-                    'x1',
-                    '100.00',
-                  ]}
-                />
-
-                <Row
-                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
-                  data={[
-                    <View
-                      style={{
-                        alignSelf: 'center',
-                        flexDirection: 'row',
-                        gap: 5,
-                      }}>
-                      <TouchableOpacity>
-                        <SvgXml xml={addIconXml} width={20} height={20} />
-                      </TouchableOpacity>
-                    </View>,
-                    ,
-                    '',
-                    '',
-                  ]}
-                />
-              </>
-            ) : (
-              <>
-                <Row
-                  style={{...styles.tableHead, borderBottomColor: theme.text}}
-                  textStyle={{textAlign: 'center', color: theme.text}}
-                  data={['Items', 'Qty', 'Price']}
-                />
-                <Row
-                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
-                  data={['Item1', 'x1', '100.00']}
-                />
-                <Row
-                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
-                  data={['Item2', 'x1', '100.00']}
-                />
-                <Row
-                  textStyle={{textAlign: 'center', color: theme.textPrimary}}
-                  data={['Item3', 'x1', '100.00']}
-                />
-              </>
-            )}
-          </Table>
-
-          <View
-            style={{
-              alignItems: 'flex-end',
-              width: '100%',
-            }}>
-            <View style={{width: 150}}>
-              {onSuccess ? (
-                <View style={{flexDirection: 'row', gap: 5}}>
-                  <Button onPress={() => setOnSuccess(false)} type="secondary">
-                    <Text style={{color: theme.textPrimary}}>Cancel</Text>
-                  </Button>
-                  <Button onPress={() => setOnSuccess(false)}>
-                    <Text style={{color: 'rgba(255,255,255,0.8)'}}>Save</Text>
-                  </Button>
-                </View>
-              ) : (
-                <Button onPress={() => setModalVisible(true)}>
-                  <Text style={{color: 'rgba(255,255,255,0.8)'}}>
-                    Change Order
-                  </Text>
-                </Button>
-              )}
-            </View>
-          </View>
-        </View>
+        ))}
       </View>
-      <Modal
-        title="Confirm Change Order"
-        modalVisible={modalVisible}
-        onOk={handlePinOk}
-        onCancel={() => setModalVisible(false)}>
-        <View style={{gap: 5}}>
-          <Text style={{color: theme.text}}>Input Pin</Text>
-          <View style={{height: 30, width: 250}}>
-            <Input placeHolder="PIN" />
-          </View>
-        </View>
-      </Modal>
     </ScrollView>
   );
+
+  return (
+    <>
+      <DrawerLayoutAndroid
+        ref={drawerRef}
+        renderNavigationView={drawerView}
+        drawerWidth={300}>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={{
+            ...backgroundStyle,
+            height: '100%',
+          }}>
+          <View
+            style={{
+              ...styles.screen,
+            }}>
+            <View style={styles.headNav}>
+              <TouchableOpacity onPress={onPressBack}>
+                <SvgXml
+                  color={theme.textPrimary}
+                  fill={theme.textPrimary}
+                  xml={backIconXml}
+                  width={25}
+                  height={25}
+                />
+              </TouchableOpacity>
+
+              <Text style={{color: theme.textPrimary, ...styles.head}}>
+                View Order {'>'} {params?.refNo}
+              </Text>
+            </View>
+            <View
+              style={{
+                ...styles.mainContainer,
+                backgroundColor: theme.backShade,
+              }}>
+              <Text
+                style={{
+                  color: theme.textPrimary,
+                  ...styles.head,
+                }}>
+                Order Details
+              </Text>
+              <View style={{...styles.container}}>
+                <View style={styles.item}>
+                  <Text style={{color: theme.text, ...styles.tag}}>
+                    Reference No.
+                  </Text>
+                  <Text style={{color: theme.textPrimary}}>
+                    {params?.refNo}
+                  </Text>
+                </View>
+
+                <View style={styles.item}>
+                  <Text style={{color: theme.text, ...styles.tag}}>
+                    Customer
+                  </Text>
+                  <Text style={{color: theme.textPrimary}}>
+                    {params?.customerName}
+                  </Text>
+                </View>
+
+                <View style={styles.item}>
+                  <Text style={{color: theme.text, ...styles.tag}}>Total</Text>
+                  <Text style={{color: theme.textPrimary}}>₱300.00</Text>
+                </View>
+
+                <View style={styles.item}>
+                  <Text style={{color: theme.text, ...styles.tag}}>
+                    Cashier
+                  </Text>
+                  <Text style={{color: theme.textPrimary}}>
+                    {params?.cashierName}
+                  </Text>
+                </View>
+
+                <View style={styles.item}>
+                  <Text style={{color: theme.text, ...styles.tag}}>Date</Text>
+                  <Text style={{color: theme.textPrimary}}>{params?.date}</Text>
+                </View>
+
+                <View style={styles.item}>
+                  <Text style={{color: theme.text, ...styles.tag}}>Time</Text>
+                  <Text style={{color: theme.textPrimary}}>{params?.time}</Text>
+                </View>
+              </View>
+
+              <Table style={styles.tableContainer}>
+                {onSuccess ? (
+                  <>
+                    <Row
+                      style={{
+                        ...styles.tableHead,
+                        borderBottomColor: theme.text,
+                      }}
+                      textStyle={{textAlign: 'center', color: theme.text}}
+                      data={['Items', 'Qty', 'Price']}
+                    />
+                    <Row
+                      textStyle={{
+                        textAlign: 'center',
+                        color: theme.textPrimary,
+                      }}
+                      data={[
+                        <View
+                          style={{
+                            alignSelf: 'center',
+                            flexDirection: 'row',
+                            gap: 5,
+                          }}>
+                          <TouchableOpacity>
+                            <SvgXml xml={minusIconXml} width={20} height={20} />
+                          </TouchableOpacity>
+                          <Text style={{color: theme.textPrimary}}>Item1</Text>
+                        </View>,
+                        ,
+                        'x1',
+                        '100.00',
+                      ]}
+                    />
+                    <Row
+                      textStyle={{
+                        textAlign: 'center',
+                        color: theme.textPrimary,
+                      }}
+                      data={[
+                        <View
+                          style={{
+                            alignSelf: 'center',
+                            flexDirection: 'row',
+                            gap: 5,
+                          }}>
+                          <TouchableOpacity>
+                            <SvgXml xml={minusIconXml} width={20} height={20} />
+                          </TouchableOpacity>
+                          <Text style={{color: theme.textPrimary}}>Item2</Text>
+                        </View>,
+                        ,
+                        'x1',
+                        '100.00',
+                      ]}
+                    />
+                    <Row
+                      textStyle={{
+                        textAlign: 'center',
+                        color: theme.textPrimary,
+                      }}
+                      data={[
+                        <View
+                          style={{
+                            alignSelf: 'center',
+                            flexDirection: 'row',
+                            gap: 5,
+                          }}>
+                          <TouchableOpacity>
+                            <SvgXml xml={minusIconXml} width={20} height={20} />
+                          </TouchableOpacity>
+                          <Text style={{color: theme.textPrimary}}>Item3</Text>
+                        </View>,
+                        ,
+                        'x1',
+                        '100.00',
+                      ]}
+                    />
+
+                    <Row
+                      textStyle={{
+                        textAlign: 'center',
+                        color: theme.textPrimary,
+                      }}
+                      data={[
+                        <View
+                          style={{
+                            alignSelf: 'center',
+                            flexDirection: 'row',
+                            gap: 5,
+                          }}>
+                          <TouchableOpacity
+                            onPress={() => drawerRef.current?.openDrawer()}>
+                            <SvgXml xml={addIconXml} width={20} height={20} />
+                          </TouchableOpacity>
+                        </View>,
+                        '',
+                        '',
+                      ]}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Row
+                      style={{
+                        ...styles.tableHead,
+                        borderBottomColor: theme.text,
+                      }}
+                      textStyle={{textAlign: 'center', color: theme.text}}
+                      data={['Items', 'Qty', 'Price']}
+                    />
+                    <Row
+                      textStyle={{
+                        textAlign: 'center',
+                        color: theme.textPrimary,
+                      }}
+                      data={['Item1', 'x1', '100.00']}
+                    />
+                    <Row
+                      textStyle={{
+                        textAlign: 'center',
+                        color: theme.textPrimary,
+                      }}
+                      data={['Item2', 'x1', '100.00']}
+                    />
+                    <Row
+                      textStyle={{
+                        textAlign: 'center',
+                        color: theme.textPrimary,
+                      }}
+                      data={['Item3', 'x1', '100.00']}
+                    />
+                  </>
+                )}
+              </Table>
+
+              <View
+                style={{
+                  alignItems: 'flex-end',
+                  width: '100%',
+                }}>
+                <View style={{width: 150}}>
+                  {onSuccess ? (
+                    <View style={{flexDirection: 'row', gap: 5}}>
+                      <Button
+                        onPress={() => setOnSuccess(false)}
+                        type="secondary">
+                        <Text style={{color: theme.textPrimary}}>Cancel</Text>
+                      </Button>
+                      <Button onPress={() => setOnSuccess(false)}>
+                        <Text style={{color: 'rgba(255,255,255,0.8)'}}>
+                          Save
+                        </Text>
+                      </Button>
+                    </View>
+                  ) : (
+                    <Button onPress={() => setModalVisible(true)}>
+                      <Text style={{color: 'rgba(255,255,255,0.8)'}}>
+                        Change Order
+                      </Text>
+                    </Button>
+                  )}
+                </View>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
+
+        <Modal
+          title="Confirm Change Order"
+          modalVisible={modalVisible}
+          onOk={handlePinOk}
+          onCancel={() => setModalVisible(false)}>
+          <View style={{gap: 5}}>
+            <Text style={{color: theme.text}}>Input Pin</Text>
+            <View style={{height: 30, width: 250}}>
+              <Input placeHolder="PIN" />
+            </View>
+          </View>
+        </Modal>
+      </DrawerLayoutAndroid>
+    </>
+  );
 };
+
+const menuStyle = StyleSheet.create({
+  productsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 5,
+    justifyContent: 'space-evenly',
+  },
+});
 
 const backIconXml = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>`;
 const minusIconXml = `<svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">

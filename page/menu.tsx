@@ -8,58 +8,103 @@ import Search from '../component/search';
 import Product from '../component/product';
 import MenuTitle from '../component/title';
 import useTheme from '../hooks/useTheme';
+import useMenuContext from '../context/menuContext';
 
 const Menu = ({
   navigation,
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
   const theme = useTheme();
+  const {updateOrderMenu, state, getProductCount} = useMenuContext();
+
+  const onAddItem = ({name, price}: {name: string; price: number}) => {
+    updateOrderMenu({name, price, count: getProductCount(name) + 1});
+  };
+  const onRemoveItem = ({name, price}: {name: string; price: number}) => {
+    const newCount = getProductCount(name) - 1;
+    updateOrderMenu({name, price, count: newCount > 0 ? newCount : 0});
+  };
+
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
       <View>
         <Text style={{color: theme.text}}>Menu</Text>
       </View>
-      <MenuTitle>Bundles</MenuTitle>
-      <View style={menuStyle.productsContainer}>
-        <Product name="Bundle A" price={300} />
-        <Product name="Bundle B" price={400} />
-        <Product name="Bundle C" price={500} />
-        <Product name="Bundle D" price={600} />
-      </View>
-      <MenuTitle>Single Meals</MenuTitle>
-      <View style={menuStyle.productsContainer}>
-        <Product name="Chicken W/ Unli Rice" price={79} />
-        <Product name="2 pcs Chicken W/ Rice" price={80} />
-        <Product name="Leg Quarter / Breast Part" price={65} />
-        <View style={{width: 180}}></View>
-      </View>
-      <MenuTitle>Alacart</MenuTitle>
-      <View style={menuStyle.productsContainer}>
-        <Product name="Whole Chicken" price={220} />
-        <Product name="Half Chicken" price={120} />
-        <Product name="Leg Quarter" price={45} />
-        <Product name="Breast Part" price={20} />
-        <Product name="Assorted Part" price={45} />
-        <Product name="Leeg" price={20} />
-      </View>
-      <MenuTitle>Drinks</MenuTitle>
-      <View style={menuStyle.productsContainer}>
-        <Product name="Soft Drinks" price={20} />
-        <Product name="Ice Tea" price={50} />
-      </View>
-      <MenuTitle>Addons</MenuTitle>
-      <View style={menuStyle.productsContainer}>
-        <Product name="Fried Egg" price={15} />
-        <Product name="Gravy" price={10} />
-        <Product name="Soup (2 Cups)" price={10} />
-        <Product name="Hot Souce" price={10} />
-        <Product name="Fried Rice" price={15} />
-        <Product name="Ala King Souce" price={25} />
-      </View>
+
+      {MenuDummy.map(({section, menu}, index) => (
+        <View key={index}>
+          <MenuTitle>{section}</MenuTitle>
+          <View style={menuStyle.productsContainer}>
+            {menu.map(component => (
+              <Product
+                name={component.name}
+                price={component.price}
+                onAddItem={onAddItem}
+                onRemoveItem={onRemoveItem}
+                productCount={getProductCount(component.name)}
+                key={component.name + ' ' + index}
+              />
+            ))}
+          </View>
+        </View>
+      ))}
     </Layout>
   );
 };
+
+export const MenuDummy = [
+  {
+    section: 'Bundles',
+    menu: [
+      {name: 'Bundle A', price: 300},
+      {name: 'Bundle B', price: 400},
+      {name: 'Bundle C', price: 500},
+      {name: 'Bundle D', price: 600},
+    ],
+  },
+
+  {
+    section: 'Single Meals',
+    menu: [
+      {name: 'Chicken W/ Unli Rice', price: 79},
+      {name: '2 pcs Chicken W/ Rice', price: 80},
+      {name: 'Leg Quarter / Breast Part', price: 35},
+    ],
+  },
+
+  {
+    section: 'Alacart',
+    menu: [
+      {name: 'Whole Chicken', price: 79},
+      {name: 'Half Chicken', price: 80},
+      {name: 'Leg Quarter', price: 35},
+      {name: 'Breast Part', price: 35},
+      {name: 'Leeg', price: 35},
+    ],
+  },
+
+  {
+    section: 'Drinks',
+    menu: [
+      {name: 'Coke', price: 20},
+      {name: 'Sprite', price: 20},
+      {name: 'Ice Tea', price: 50},
+    ],
+  },
+
+  {
+    section: 'Addons',
+    menu: [
+      {name: 'Fried Egg', price: 15},
+      {name: 'Gravy', price: 10},
+      {name: 'Soup (2 Cups)', price: 10},
+      {name: 'Hot Souce', price: 10},
+      {name: 'Fried Rice', price: 15},
+      {name: 'Ala King Souce', price: 25},
+    ],
+  },
+];
 
 const menuStyle = StyleSheet.create({
   productsContainer: {
