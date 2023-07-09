@@ -14,12 +14,7 @@ const Cart = ({isFocused}: Props) => {
   const theme = useTheme();
   return (
     <View>
-      <SvgXml
-        color={isFocused ? theme.textPrimary : theme.text}
-        xml={xml}
-        width={25}
-        height={25}
-      />
+      <SvgXml color={theme.textPrimary} xml={xml} width={25} height={25} />
       {menuCtx.state.totalNumberOfOrder !== 0 && (
         <View style={{position: 'absolute', top: -5, right: -10}}>
           <CircleCount backgroundColor="red">

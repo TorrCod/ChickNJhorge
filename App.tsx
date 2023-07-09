@@ -131,10 +131,7 @@ const TabBarIcon = (props: TabBarIconProps) => {
         backgroundColor: props.focused ? props.color : undefined,
         borderRadius: 3,
       }}>
-      <SvgXml
-        color={props.focused ? theme.textPrimary : theme.text}
-        xml={props.xml}
-      />
+      <SvgXml color={theme.textPrimary} xml={props.xml} />
     </View>
   );
 };
