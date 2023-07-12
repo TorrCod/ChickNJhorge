@@ -107,6 +107,7 @@ const NavScreen = () => {
             tabBarShowLabel: false,
             tabBarButton: () => null,
             tabBarStyle: styles.bottomTabBar,
+            unmountOnBlur: true,
           }}
         />
       </Tab.Navigator>
