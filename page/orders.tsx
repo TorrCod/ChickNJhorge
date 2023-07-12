@@ -92,7 +92,7 @@ const Orders = ({
       <Table>
         <Row
           data={['Date', 'Customer Name', 'Cashier Name', 'Sales', 'Action']}
-          textStyle={{...styles.text, color: '#e4e4e4'}}
+          textStyle={{...styles.text, color: '#e4e4e4', fontSize: 10}}
           style={{backgroundColor: theme.primary}}
         />
         <Rows
