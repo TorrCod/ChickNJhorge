@@ -9,7 +9,7 @@ const useTheme = () => {
     backShade: '#D9D9D9',
     text: 'rgba(0, 0, 0, 0.5)',
     textPrimary: 'rgba(0,0,0,1)',
-    primary: '#2f120d',
+    primary: '#FCBC86',
   };
   const [theme, setTheme] = useState(themeInit);
   useEffect(() => {

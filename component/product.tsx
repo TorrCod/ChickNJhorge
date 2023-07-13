@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {style} from '../styles/style';
 import {SvgXml} from 'react-native-svg';
@@ -35,6 +35,14 @@ const Product = ({
   const minusHandle = () => onRemoveItem?.({name, price});
   const theme = useTheme();
 
+  const localStyles = StyleSheet.create({
+    shadow: {
+      textShadowColor: '#rgba(0, 0, 0, 0.30)',
+      textShadowOffset: {height: 1, width: 1},
+      textShadowRadius: 1,
+    },
+  });
+
   return (
     <View
       style={{
@@ -43,11 +51,18 @@ const Product = ({
         borderLeftColor: theme.primary,
         borderLeftWidth: 5,
       }}>
-      <Text style={{color: productCount ? 'white' : theme.textPrimary}}>
+      <Text
+        style={{
+          color: productCount ? 'white' : theme.textPrimary,
+          ...(productCount ? localStyles.shadow : {}),
+        }}>
         {name}
       </Text>
       <Text
-        style={{color: productCount ? 'rgba(255, 255, 255, 0.8)' : theme.text}}>
+        style={{
+          color: productCount ? 'rgba(255, 255, 255, 0.8)' : theme.text,
+          ...(productCount ? localStyles.shadow : {}),
+        }}>
         ₱ {price}
       </Text>
       {/* {option && <Dropdown label="Option" data={option} onSelect={arg => {}} />} */}
@@ -63,7 +78,12 @@ const Product = ({
         <TouchableOpacity onPress={minusHandle}>
           <SvgXml color={productCount ? 'white' : theme.text} xml={minusXml} />
         </TouchableOpacity>
-        <Text style={productCount ? {color: 'white'} : {color: theme.text}}>
+        <Text
+          style={
+            productCount
+              ? {color: 'white', ...(productCount ? localStyles.shadow : {})}
+              : {color: theme.text}
+          }>
           {productCount}
         </Text>
         <TouchableOpacity onPress={addHandle}>
