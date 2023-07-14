@@ -6,7 +6,7 @@ const useTheme = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const themeInit = {
     backGround: Colors.lighter,
-    backShade: '#D9D9D9',
+    backShade: '#FCBC863f',
     text: 'rgba(0, 0, 0, 0.8)',
     textPrimary: 'rgba(0,0,0,1)',
     primary: '#FCBC86',

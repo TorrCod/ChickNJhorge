@@ -16,7 +16,7 @@ const Search = () => {
         }}>
         <SvgXml xml={xml} width={15} height={15} color={theme.text} />
         <TextInput
-          style={{padding: 5, color: theme.textPrimary}}
+          style={{padding: 5, color: theme.textPrimary, width: '100%'}}
           placeholderTextColor={theme.text}
           placeholder="Search Product"
         />
