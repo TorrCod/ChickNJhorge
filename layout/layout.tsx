@@ -13,6 +13,7 @@ import React, {ReactNode} from 'react';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import AppTitle from '../component/AppTitle';
 import Cart from '../component/Cart';
+import useTheme from '../hooks/useTheme';
 
 const Layout = ({
   children,
@@ -24,6 +25,7 @@ const Layout = ({
   cartFocused?: boolean;
 }) => {
   const isDarkMode = useColorScheme() === 'dark';
+  const theme = useTheme();
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -31,7 +33,7 @@ const Layout = ({
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+        backgroundColor={theme.primary}
       />
       <View style={{...styles.header}}>
         <AppTitle />

@@ -61,11 +61,7 @@ const PreOrder = ({
               </Text>
             </View>
             <View style={{...style.center}}>
-              <Button onPress={handlePlaceOrder}>
-                <Text style={{color: 'white', paddingHorizontal: 50}}>
-                  Place Order
-                </Text>
-              </Button>
+              <Button onPress={handlePlaceOrder}>Place Order</Button>
             </View>
           </Box>
         )}
@@ -108,7 +104,7 @@ const PreOrder = ({
                     navigation.navigate('Menu');
                     setModalVisible(false);
                   }}>
-                  <Text style={{color: 'white'}}>Ok</Text>
+                  ok
                 </Button>
               </View>
             </View>
@@ -147,6 +143,11 @@ const preOrderStyle = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     padding: 27,
+  },
+  shadow: {
+    textShadowColor: '#rgba(0, 0, 0, 0.30)',
+    textShadowOffset: {height: 1, width: 1},
+    textShadowRadius: 1,
   },
 });
 

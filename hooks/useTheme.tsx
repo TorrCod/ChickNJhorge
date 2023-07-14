@@ -7,7 +7,7 @@ const useTheme = () => {
   const themeInit = {
     backGround: Colors.lighter,
     backShade: '#D9D9D9',
-    text: 'rgba(0, 0, 0, 0.5)',
+    text: 'rgba(0, 0, 0, 0.8)',
     textPrimary: 'rgba(0,0,0,1)',
     primary: '#FCBC86',
   };
