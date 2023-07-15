@@ -10,6 +10,7 @@ type Props = {
   children?: React.ReactNode;
   title?: string;
   onCancel?: () => void;
+  hideButton?: boolean;
 };
 
 const Component = (props: Props) => {
@@ -39,17 +40,19 @@ const Component = (props: Props) => {
             </Text>
             <View>{props.children}</View>
           </View>
-          <View
-            style={{
-              ...styles.buttonContainer,
-              backgroundColor: theme.backShade,
-            }}>
-            <View style={{width: 75}}>
-              <Button onPress={() => props.onOk?.()}>
-                <Text style={{color: 'white'}}>Ok</Text>
-              </Button>
+          {!props.hideButton && (
+            <View
+              style={{
+                ...styles.buttonContainer,
+                backgroundColor: theme.backShade,
+              }}>
+              <View style={{width: 75}}>
+                <Button onPress={() => props.onOk?.()}>
+                  <Text style={{color: 'white'}}>Ok</Text>
+                </Button>
+              </View>
             </View>
-          </View>
+          )}
         </View>
       </View>
     </Modal>

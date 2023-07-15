@@ -19,6 +19,16 @@ type Props = {
 
 const Button = ({children, onPress, type}: Props) => {
   const theme = useTheme();
+  const localStyles = StyleSheet.create({
+    button: {
+      textShadowColor:
+        type === 'secondary' ? undefined : '#rgba(0, 0, 0, 0.30)',
+      textShadowOffset:
+        type === 'secondary' ? undefined : {height: 1, width: 1},
+      textShadowRadius: type === 'secondary' ? undefined : 1,
+      color: type === 'secondary' ? theme.primary : 'white',
+    },
+  });
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -29,24 +39,19 @@ const Button = ({children, onPress, type}: Props) => {
         paddingHorizontal: 20,
         borderColor: type === 'secondary' ? theme.primary : undefined,
         borderWidth: type === 'secondary' ? 1 : undefined,
-        shadowColor: '#000',
-        shadowOffset: {height: 2, width: 4},
-        shadowOpacity: 1,
-        shadowRadius: 4,
-        elevation: 5,
+        ...(type === 'secondary'
+          ? {}
+          : {
+              shadowColor: '#000',
+              shadowOffset: {height: 2, width: 4},
+              shadowOpacity: 1,
+              shadowRadius: 4,
+              elevation: 1,
+            }),
       }}>
       <Text style={localStyles.button}>{children}</Text>
     </TouchableOpacity>
   );
 };
-
-const localStyles = StyleSheet.create({
-  button: {
-    textShadowColor: '#rgba(0, 0, 0, 0.30)',
-    textShadowOffset: {height: 1, width: 1},
-    textShadowRadius: 1,
-    color: 'white',
-  },
-});
 
 export default Button;

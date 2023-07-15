@@ -23,6 +23,7 @@ import Product from '../component/product';
 import MenuTitle from '../component/title';
 import {MenuDummy} from './menu';
 import useMenuContext from '../context/menuContext';
+import Box from '../component/box';
 
 type ItemOrdered = {itemName: string; qty: number; price: number};
 
@@ -50,11 +51,6 @@ const ViewOder = ({
     setItems(JSON.parse(JSON.stringify(fetchItem)));
     setDefaultItem(JSON.parse(JSON.stringify(fetchItem)));
   }, []);
-
-  const handlePinOk = () => {
-    setModalVisible(false);
-    setOnSuccess(true);
-  };
   const onAddItem = ({name, price}: {name: string; price: number}) => {
     const isItemExist = items.filter(({itemName}) => itemName === name)[0];
     if (isItemExist) {
@@ -88,6 +84,13 @@ const ViewOder = ({
   const onCancelChangeOrder = () => {
     setOnSuccess(false);
     setItems(defaultItem);
+  };
+
+  const onChangePin = (val: string) => {
+    if (val.length === 6) {
+      setModalVisible(false);
+      setOnSuccess(true);
+    }
   };
 
   const drawerView = () => (
@@ -151,21 +154,18 @@ const ViewOder = ({
               </TouchableOpacity>
 
               <Text style={{color: theme.textPrimary, ...styles.head}}>
-                View Order {'>'} {params?.refNo}
+                Order {'>'} {params?.refNo}
               </Text>
             </View>
-            <View
+
+            <Text
               style={{
-                ...styles.mainContainer,
-                backgroundColor: theme.backShade,
+                color: theme.textPrimary,
+                marginTop: 10,
               }}>
-              <Text
-                style={{
-                  color: theme.textPrimary,
-                  ...styles.head,
-                }}>
-                Order Details
-              </Text>
+              Details
+            </Text>
+            <Box paddingH={20} paddingV={20}>
               <View style={{...styles.container}}>
                 <View style={styles.item}>
                   <Text style={{color: theme.text, ...styles.tag}}>
@@ -216,7 +216,15 @@ const ViewOder = ({
                   <Text style={{color: theme.textPrimary}}>{params?.time}</Text>
                 </View>
               </View>
-
+            </Box>
+            <Text
+              style={{
+                color: theme.textPrimary,
+                marginTop: 10,
+              }}>
+              Items
+            </Text>
+            <Box paddingH={20} paddingV={20}>
               <Table style={styles.tableContainer}>
                 <Row
                   style={{
@@ -308,7 +316,7 @@ const ViewOder = ({
                       <Button
                         onPress={() => onCancelChangeOrder()}
                         type="secondary">
-                        <Text style={{color: theme.textPrimary}}>Cancel</Text>
+                        Cancel
                       </Button>
                       <Button onPress={() => setOnSuccess(false)}>
                         <Text style={{color: 'rgba(255,255,255,0.8)'}}>
@@ -325,20 +333,17 @@ const ViewOder = ({
                   )}
                 </View>
               </View>
-            </View>
+            </Box>
           </View>
         </ScrollView>
 
         <Modal
+          hideButton
           title="Confirm Change Order"
           modalVisible={modalVisible}
-          onOk={handlePinOk}
           onCancel={() => setModalVisible(false)}>
-          <View style={{gap: 5}}>
-            <Text style={{color: theme.text}}>Input Pin</Text>
-            <View style={{height: 30, width: 250}}>
-              <Input placeHolder="PIN" />
-            </View>
+          <View style={{height: 30, width: 250}}>
+            <Input placeHolder="PIN" onChangeText={onChangePin} />
           </View>
         </Modal>
       </DrawerLayoutAndroid>

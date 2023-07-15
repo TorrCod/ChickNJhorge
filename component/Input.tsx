@@ -3,7 +3,11 @@ import React, {ReactNode} from 'react';
 import useTheme from '../hooks/useTheme';
 import {style} from '../styles/style';
 
-type Props = {icon?: ReactNode; placeHolder?: string};
+type Props = {
+  icon?: ReactNode;
+  placeHolder?: string;
+  onChangeText?: (text: string) => void;
+};
 
 const Component = (props: Props) => {
   const theme = useTheme();
@@ -23,6 +27,7 @@ const Component = (props: Props) => {
         keyboardType="numeric"
         secureTextEntry={true}
         maxLength={6}
+        onChangeText={props.onChangeText}
       />
     </View>
   );
