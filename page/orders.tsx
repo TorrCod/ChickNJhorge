@@ -85,7 +85,6 @@ const Orders = ({
 
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
-      <Search />
       <View>
         <Text style={{color: theme.text}}>Order</Text>
       </View>

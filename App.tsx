@@ -24,14 +24,15 @@ function App() {
 }
 
 const NavScreen = () => {
-  const theme = useTheme();
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
   const styles = StyleSheet.create({
-    bottomTabBar: {height: 39, backgroundColor: theme.backShade},
+    bottomTabBar: {
+      height: 42,
+      backgroundColor: backgroundStyle.backgroundColor,
+    },
   });
 
   return (

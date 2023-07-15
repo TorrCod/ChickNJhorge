@@ -33,7 +33,7 @@ const Layout = ({
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={theme.primary}
+        backgroundColor={backgroundStyle.backgroundColor}
       />
       <View style={{...styles.header}}>
         <AppTitle />
