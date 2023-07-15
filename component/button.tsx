@@ -29,10 +29,11 @@ const Button = ({children, onPress, type}: Props) => {
         paddingHorizontal: 20,
         borderColor: type === 'secondary' ? theme.primary : undefined,
         borderWidth: type === 'secondary' ? 1 : undefined,
-        shadowColor: 'rgb(0, 0, 0)',
-        shadowOffset: {height: 50, width: 50},
-        shadowOpacity: 0.1,
-        shadowRadius: 50,
+        shadowColor: '#000',
+        shadowOffset: {height: 2, width: 4},
+        shadowOpacity: 1,
+        shadowRadius: 4,
+        elevation: 5,
       }}>
       <Text style={localStyles.button}>{children}</Text>
     </TouchableOpacity>

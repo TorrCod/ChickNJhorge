@@ -55,11 +55,11 @@ const PreOrder = ({
         </Text>
       </View>
       <View style={{gap: 5}}>
-        <Box>
-          {menuContext.state.itemsOrdered.length != 0 && (
+        {menuContext.state.itemsOrdered.length != 0 && (
+          <Box>
             <CustomerName onChangeName={menuContext.onChangeName} />
-          )}
-        </Box>
+          </Box>
+        )}
         <Box>
           <View style={{gap: 5}}>
             {menuContext.state.itemsOrdered.map((item, index) => (
@@ -78,14 +78,13 @@ const PreOrder = ({
         </Box>
         {menuContext.state.itemsOrdered.length != 0 && (
           <Box>
-            <LineSpace />
-            <View style={style.spaceBetween}>
-              <Text style={{color: theme.textPrimary}}>Total</Text>
-              <Text style={{color: theme.textPrimary}}>
-                ₱{menuContext.state.totalPrice}
-              </Text>
-            </View>
-            <View style={{...style.center}}>
+            <View style={{gap: 5}}>
+              <View style={style.spaceBetween}>
+                <Text style={{color: theme.textPrimary}}>Total</Text>
+                <Text style={{color: theme.textPrimary}}>
+                  ₱{menuContext.state.totalPrice}
+                </Text>
+              </View>
               <Button onPress={handlePlaceOrder}>Place Order</Button>
             </View>
           </Box>
