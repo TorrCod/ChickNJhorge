@@ -2,16 +2,16 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {ReactNode} from 'react';
 import useTheme from '../hooks/useTheme';
 
-type Props = {children: ReactNode; padding?: number};
+type Props = {children: ReactNode; paddingH?: number; paddingV?: number};
 
-const Box = ({children, padding}: Props) => {
+const Box = ({children, paddingV, paddingH}: Props) => {
   const defaultTheme = useTheme();
 
   const styles = StyleSheet.create({
     box: {
       borderRadius: 10,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
+      paddingVertical: paddingV ?? 10,
+      paddingHorizontal: paddingH ?? 20,
     },
   });
 

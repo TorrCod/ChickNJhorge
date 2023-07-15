@@ -20,6 +20,7 @@ import {
 } from 'react-native-reanimated-table';
 import {OrderData} from './type';
 import {orderToTableData} from '../util/util';
+import Box from '../component/box';
 
 type ActionProps = {
   navigation: BottomTabNavigationProp<
@@ -88,27 +89,49 @@ const Orders = ({
       <View>
         <Text style={{color: theme.text}}>Order</Text>
       </View>
-      <Table>
-        <Row
-          data={['Date', 'Customer Name', 'Cashier Name', 'Sales', 'Action']}
-          textStyle={{...styles.text, color: '#e4e4e4', fontSize: 10}}
-          style={{backgroundColor: theme.primary}}
-        />
-        <Rows
-          textStyle={{...styles.text, color: theme.textPrimary}}
-          data={data}
-        />
-      </Table>
+      <Box paddingH={20} paddingV={20}>
+        <Table>
+          <Row
+            data={['Date', 'Customer Name', 'Cashier Name', 'Sales', 'Action']}
+            textStyle={{...styles.text, ...styles.textShadow}}
+            style={{backgroundColor: theme.primary, ...styles.tableHead}}
+          />
+          <Rows
+            textStyle={{
+              ...styles.text,
+              color: theme.textPrimary,
+              marginVertical: 5,
+            }}
+            data={data}
+          />
+        </Table>
+      </Box>
     </Layout>
   );
 };
 
 const styles = StyleSheet.create({
   container: {flex: 1, padding: 16, backgroundColor: '#fff'},
-  text: {margin: 6},
+  text: {
+    color: '#e4e4e4',
+    fontSize: 12,
+    textAlign: 'center',
+  },
+  textShadow: {
+    textShadowColor: '#rgba(0, 0, 0, 0.30)',
+    textShadowOffset: {height: 1, width: 1},
+    textShadowRadius: 1,
+  },
   changeOrder: {
     textDecorationStyle: 'solid',
     textDecorationLine: 'underline',
+  },
+  tableHead: {
+    width: '100%',
+    justifyContent: 'center',
+    borderTopStartRadius: 5,
+    borderTopRightRadius: 5,
+    paddingVertical: 5,
   },
 });
 
