@@ -1,4 +1,11 @@
-import {View, Text, StyleSheet, Modal} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Modal,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import Layout from '../layout/layout';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
@@ -26,15 +33,33 @@ const PreOrder = ({
     setModalVisible(true);
   };
 
+  const onPressBack = () => {
+    navigation.navigate('Menu');
+  };
+
   return (
-    <Layout cartFocused onCartPress={() => navigation.navigate('PreOrder')}>
-      <Search />
-      <Text style={{color: theme.text}}>Pre Order</Text>
-      {menuContext.state.itemsOrdered.length != 0 && (
-        <CustomerName onChangeName={menuContext.onChangeName} />
-      )}
-      <LineSpace />
+    <ScrollView style={{padding: 5}}>
+      <View style={preOrderStyle.headNav}>
+        <TouchableOpacity onPress={onPressBack}>
+          <SvgXml
+            color={theme.textPrimary}
+            fill={theme.textPrimary}
+            xml={backIconXml}
+            width={25}
+            height={25}
+          />
+        </TouchableOpacity>
+
+        <Text style={{color: theme.textPrimary, ...preOrderStyle.head}}>
+          Cart
+        </Text>
+      </View>
       <View style={{gap: 5}}>
+        <Box>
+          {menuContext.state.itemsOrdered.length != 0 && (
+            <CustomerName onChangeName={menuContext.onChangeName} />
+          )}
+        </Box>
         <Box>
           <View style={{gap: 5}}>
             {menuContext.state.itemsOrdered.map((item, index) => (
@@ -111,7 +136,7 @@ const PreOrder = ({
           </View>
         </View>
       </Modal>
-    </Layout>
+    </ScrollView>
   );
 };
 
@@ -149,6 +174,17 @@ const preOrderStyle = StyleSheet.create({
     textShadowOffset: {height: 1, width: 1},
     textShadowRadius: 1,
   },
+  headNav: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 15,
+    marginBottom: 15,
+  },
+  head: {
+    fontSize: 18,
+  },
 });
+
+const backIconXml = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M21 11H6.414l5.293-5.293-1.414-1.414L2.586 12l7.707 7.707 1.414-1.414L6.414 13H21z"></path></svg>`;
 
 export default PreOrder;

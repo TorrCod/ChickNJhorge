@@ -1,5 +1,5 @@
-import {View, Text, TextInput} from 'react-native';
-import React from 'react';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import React, {useRef} from 'react';
 import {SvgXml} from 'react-native-svg';
 import {style} from '../styles/style';
 import useTheme from '../hooks/useTheme';
@@ -10,18 +10,25 @@ type Props = {
 
 const CustomerName = (props: Props) => {
   const theme = useTheme();
+  const textInputRef = useRef<TextInput>(null);
+  const handleFocus = () => textInputRef.current?.focus();
   return (
     <View
       style={{
-        marginTop: 10,
         flexDirection: 'row',
         width: '100%',
         justifyContent: 'space-between',
-        paddingHorizontal: 20,
+        alignItems: 'center',
       }}>
       <View style={{flex: 5}}>
         <TextInput
-          style={{...style.h2, margin: 0, padding: 0, color: theme.textPrimary}}
+          ref={textInputRef}
+          style={{
+            margin: 0,
+            padding: 0,
+            color: theme.textPrimary,
+            fontSize: 18,
+          }}
           placeholder="Customer Name"
           onChangeText={props.onChangeName}
           placeholderTextColor={theme.text}
@@ -29,7 +36,9 @@ const CustomerName = (props: Props) => {
         <Text style={{color: theme.text}}>Cashier Name</Text>
       </View>
       <View>
-        <SvgXml color={theme.text} xml={editNameXml} height={30} width={30} />
+        <TouchableOpacity onPress={handleFocus}>
+          <SvgXml color={theme.text} xml={editNameXml} height={30} width={30} />
+        </TouchableOpacity>
       </View>
     </View>
   );
