@@ -10,6 +10,7 @@ import PickerMonth from '../component/month-picker';
 import Button from '../component/button';
 import {SvgXml} from 'react-native-svg';
 import Svg, {Defs, G, Path} from 'react-native-svg';
+import {Row, Rows, Table} from 'react-native-reanimated-table';
 
 const Transactions = ({
   navigation,
@@ -68,6 +69,14 @@ const Transactions = ({
       textShadowOffset: {height: 1, width: 1},
       textShadowRadius: 1,
     },
+    tableHead: {
+      backgroundColor: theme.primary,
+      width: '100%',
+      justifyContent: 'center',
+      borderTopStartRadius: 5,
+      borderTopRightRadius: 5,
+      paddingVertical: 5,
+    },
   });
 
   const Report = ({title, value}: {title: string; value: number}) => (
@@ -91,44 +100,59 @@ const Transactions = ({
         <Report title="Cost" value={50000} />
       </View>
       <Text style={style.sectionTitle}>Charts</Text>
-      <View style={[style.shadowProp, style.bg, style.chart]}>
+      <View style={[style.shadowProp, style.bg, style.chart]}></View>
+      <View style={{marginTop: 5}}>
         <PickerMonth />
       </View>
       <Text style={style.sectionTitle}>Breakdown</Text>
-      <View style={[style.shadowProp, style.bg, style.chart]}>
-        <Button onPress={() => {}} width={100}>
-          <View
-            style={{
-              width: '100%',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              alignItems: 'center',
-            }}>
-            <Image source={require('../assets/downloadIcon.png')} />
-            <Text style={[{color: 'white'}, style.textShadow]}>CSV</Text>
-          </View>
-        </Button>
+      <View style={[style.shadowProp, style.bg, style.chart, {gap: 20}]}>
+        <Table>
+          <Row
+            data={['Date', 'Cashier Name', 'Action', 'Sales']}
+            textStyle={[
+              style.textShadow,
+              {color: '#ffffff', fontSize: 12, textAlign: 'center'},
+            ]}
+            style={[style.tableHead]}
+          />
+          <Rows
+            textStyle={{
+              textAlign: 'center',
+              color: theme.textPrimary,
+              fontSize: 12,
+            }}
+            style={{paddingVertical: 5}}
+            data={dummyData}
+          />
+        </Table>
+        <View
+          style={{
+            alignItems: 'flex-end',
+          }}>
+          <Button onPress={() => {}} width={100}>
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}>
+              <Image source={require('../assets/downloadIcon.png')} />
+              <Text style={[{color: 'white'}, style.textShadow]}>CSV</Text>
+            </View>
+          </Button>
+        </View>
       </View>
     </Layout>
   );
 };
 
-const downloadXml = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs>
-  <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-    <feOffset dx="1" dy="1" result="offsetBlur" />
-    <feFlood flood-color="rgba(0, 0, 0, 0.5)" />
-    <feComposite in2="offsetBlur" operator="in" />
-    <feMerge>
-      <feMergeNode />
-      <feMergeNode in="SourceGraphic" />
-    </feMerge>
-  </filter>
-</defs>
-<g filter="url(#dropShadow)">
-  <path d="M3 17C2.45 17 1.979 16.804 1.587 16.412C1.195 16.02 0.999335 15.5493 1 15V12H3V15H15V12H17V15C17 15.55 16.804 16.021 16.412 16.413C16.02 16.805 15.5493 17.0007 15 17H3ZM9 13L4 8L5.4 6.55L8 9.15V1H10V9.15L12.6 6.55L14 8L9 13Z" fill="currentColor" />
-</g>
-</svg>
-`;
+const dummyData = [
+  ['2023-07-21', 'John', 'Take an order', 150.25],
+  ['2023-07-21', 'Jane', 'Changed an order', -50.75],
+  ['2023-07-22', 'Mike', 'Take an order', 100.0],
+  ['2023-07-22', 'Emily', 'Changed an order', -25.5],
+  ['2023-07-23', 'Chris', 'Take an order', 200.75],
+];
 
 export default Transactions;

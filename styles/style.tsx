@@ -41,7 +41,7 @@ export const style = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    borderRadius: 10,
+    borderRadius: 5,
     paddingVertical: 8,
     justifyContent: 'center',
     alignItems: 'center',

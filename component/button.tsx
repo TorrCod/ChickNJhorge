@@ -46,7 +46,7 @@ const Button = ({children, onPress, type, width}: Props) => {
           type === 'secondary'
             ? undefined
             : type === 'shade'
-            ? '#F6F6F6'
+            ? '#e6e8f1'
             : theme.primary,
         paddingHorizontal: 20,
         borderColor: type === 'secondary' ? theme.primary : undefined,
