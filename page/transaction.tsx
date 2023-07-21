@@ -108,14 +108,6 @@ const Transactions = ({
             <Text style={[{color: 'white'}, style.textShadow]}>CSV</Text>
           </View>
         </Button>
-
-        {/* <SvgXml
-          style={style.shadowProp}
-          height={300}
-          width={300}
-          xml={downloadXml}
-          color={theme.textPrimary}
-        /> */}
       </View>
     </Layout>
   );
