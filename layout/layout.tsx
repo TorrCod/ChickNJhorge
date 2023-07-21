@@ -53,7 +53,7 @@ const Layout = ({
           style={{
             paddingHorizontal: 5,
             paddingBottom: 48,
-            paddingTop: 30,
+            paddingTop: 10,
           }}>
           {children}
         </View>

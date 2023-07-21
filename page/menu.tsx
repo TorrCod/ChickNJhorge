@@ -27,9 +27,6 @@ const Menu = ({
 
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
-      <View>
-        <Text style={{color: theme.text}}>Menu</Text>
-      </View>
       <Search />
       {MenuDummy.map(({section, menu}, index) => (
         <View key={index}>

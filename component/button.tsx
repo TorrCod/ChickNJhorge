@@ -14,10 +14,11 @@ type Props = {
   children: ReactNode;
   onPress: (event: GestureResponderEvent) => void;
   style?: ViewStyle;
-  type?: 'primary' | 'secondary';
+  type?: 'primary' | 'secondary' | 'shade';
+  width?: number;
 };
 
-const Button = ({children, onPress, type}: Props) => {
+const Button = ({children, onPress, type, width}: Props) => {
   const theme = useTheme();
   const localStyles = StyleSheet.create({
     button: {
@@ -25,8 +26,14 @@ const Button = ({children, onPress, type}: Props) => {
         type === 'secondary' ? undefined : '#rgba(0, 0, 0, 0.30)',
       textShadowOffset:
         type === 'secondary' ? undefined : {height: 1, width: 1},
-      textShadowRadius: type === 'secondary' ? undefined : 1,
-      color: type === 'secondary' ? theme.primary : 'white',
+      textShadowRadius:
+        type === 'secondary' || type === 'shade' ? undefined : 1,
+      color:
+        type === 'secondary'
+          ? theme.primary
+          : type === 'shade'
+          ? theme.text
+          : 'white',
     },
   });
   return (
@@ -35,10 +42,16 @@ const Button = ({children, onPress, type}: Props) => {
       style={{
         ...style,
         ...style.button,
-        backgroundColor: type === 'secondary' ? undefined : theme.primary,
+        backgroundColor:
+          type === 'secondary'
+            ? undefined
+            : type === 'shade'
+            ? '#F6F6F6'
+            : theme.primary,
         paddingHorizontal: 20,
         borderColor: type === 'secondary' ? theme.primary : undefined,
         borderWidth: type === 'secondary' ? 1 : undefined,
+        width: width,
         ...(type === 'secondary'
           ? {}
           : {
@@ -49,7 +62,7 @@ const Button = ({children, onPress, type}: Props) => {
               elevation: 1,
             }),
       }}>
-      <Text style={localStyles.button}>{children}</Text>
+      {children}
     </TouchableOpacity>
   );
 };
