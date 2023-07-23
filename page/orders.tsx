@@ -113,7 +113,7 @@ const Orders = ({
 const styles = StyleSheet.create({
   container: {flex: 1, padding: 16, backgroundColor: '#fff'},
   text: {
-    color: '#e4e4e4',
+    color: '#ffffff',
     fontSize: 12,
     textAlign: 'center',
   },

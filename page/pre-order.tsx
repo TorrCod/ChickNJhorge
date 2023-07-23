@@ -85,7 +85,11 @@ const PreOrder = ({
                   ₱{menuContext.state.totalPrice}
                 </Text>
               </View>
-              <Button onPress={handlePlaceOrder}>Place Order</Button>
+              <Button onPress={handlePlaceOrder}>
+                <Text style={[{color: 'white'}, preOrderStyle.shadow]}>
+                  Place Order
+                </Text>
+              </Button>
             </View>
           </Box>
         )}
@@ -128,7 +132,9 @@ const PreOrder = ({
                     navigation.navigate('Menu');
                     setModalVisible(false);
                   }}>
-                  ok
+                  <Text style={[{color: 'white'}, preOrderStyle.shadow]}>
+                    ok
+                  </Text>
                 </Button>
               </View>
             </View>
