@@ -11,6 +11,7 @@ import Button from '../component/button';
 import {SvgXml} from 'react-native-svg';
 import Svg, {Defs, G, Path} from 'react-native-svg';
 import {Row, Rows, Table} from 'react-native-reanimated-table';
+import SalesChart from '../component/SalesChart';
 
 const Transactions = ({
   navigation,
@@ -100,7 +101,9 @@ const Transactions = ({
         <Report title="Cost" value={50000} />
       </View>
       <Text style={style.sectionTitle}>Charts</Text>
-      <View style={[style.shadowProp, style.bg, style.chart]}></View>
+      <View style={[style.shadowProp, style.bg, style.chart]}>
+        <SalesChart />
+      </View>
       <View style={{marginTop: 5}}>
         <PickerMonth />
       </View>

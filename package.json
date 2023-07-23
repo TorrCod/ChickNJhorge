@@ -16,6 +16,7 @@
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-native": "0.71.11",
+    "react-native-chart-kit": "^6.12.0",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-month-year-picker": "^1.9.0",
     "react-native-reanimated-table": "^0.0.2",
