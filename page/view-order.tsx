@@ -304,36 +304,29 @@ const ViewOder = ({
                   ]}
                 />
               </Table>
-
-              <View
-                style={{
-                  alignItems: 'flex-end',
-                  width: '100%',
-                }}>
-                <View style={{width: 150}}>
-                  {onSuccess ? (
-                    <View style={{flexDirection: 'row', gap: 5}}>
-                      <Button
-                        onPress={() => onCancelChangeOrder()}
-                        type="secondary">
-                        Cancel
-                      </Button>
-                      <Button onPress={() => setOnSuccess(false)}>
-                        <Text style={{color: 'rgba(255,255,255,0.8)'}}>
-                          Save
-                        </Text>
-                      </Button>
-                    </View>
-                  ) : (
-                    <Button onPress={() => setModalVisible(true)}>
-                      <Text style={{color: 'rgba(255,255,255,0.8)'}}>
-                        Change Order
-                      </Text>
-                    </Button>
-                  )}
-                </View>
-              </View>
             </Box>
+            <View style={{marginVertical: 10, alignItems: 'flex-end'}}>
+              {onSuccess ? (
+                <View style={{flexDirection: 'row', gap: 5}}>
+                  <Button
+                    onPress={() => onCancelChangeOrder()}
+                    type="secondary">
+                    <Text style={{color: theme.primary}}>Cancel</Text>
+                  </Button>
+                  <Button onPress={() => setOnSuccess(false)}>
+                    <Text style={[{color: 'white'}, menuStyle.textShadow]}>
+                      Save
+                    </Text>
+                  </Button>
+                </View>
+              ) : (
+                <Button width={150} onPress={() => setModalVisible(true)}>
+                  <Text style={[{color: 'white'}, menuStyle.textShadow]}>
+                    Change Order
+                  </Text>
+                </Button>
+              )}
+            </View>
           </View>
         </ScrollView>
 
@@ -358,6 +351,11 @@ const menuStyle = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 5,
     justifyContent: 'space-evenly',
+  },
+  textShadow: {
+    textShadowColor: '#00000034',
+    textShadowOffset: {height: 1, width: 1},
+    textShadowRadius: 1,
   },
 });
 
