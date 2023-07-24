@@ -14,28 +14,12 @@ type Props = {
   children: ReactNode;
   onPress: (event: GestureResponderEvent) => void;
   style?: ViewStyle;
-  type?: 'primary' | 'secondary' | 'shade';
+  type?: 'primary' | 'secondary' | 'shade' | 'danger';
   width?: number;
 };
 
 const Button = ({children, onPress, type, width}: Props) => {
   const theme = useTheme();
-  const localStyles = StyleSheet.create({
-    button: {
-      textShadowColor:
-        type === 'secondary' ? undefined : '#rgba(0, 0, 0, 0.30)',
-      textShadowOffset:
-        type === 'secondary' ? undefined : {height: 1, width: 1},
-      textShadowRadius:
-        type === 'secondary' || type === 'shade' ? undefined : 1,
-      color:
-        type === 'secondary'
-          ? theme.primary
-          : type === 'shade'
-          ? theme.text
-          : 'white',
-    },
-  });
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -46,7 +30,9 @@ const Button = ({children, onPress, type, width}: Props) => {
           type === 'secondary'
             ? undefined
             : type === 'shade'
-            ? '#e6e8f1'
+            ? 'white'
+            : type === 'danger'
+            ? 'red'
             : theme.primary,
         paddingHorizontal: 20,
         borderColor: type === 'secondary' ? theme.primary : undefined,
