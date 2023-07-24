@@ -14,8 +14,7 @@ const Menu = ({
   navigation,
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
-  const theme = useTheme();
-  const {updateOrderMenu, state, getProductCount} = useMenuContext();
+  const {updateOrderMenu, getProductCount} = useMenuContext();
 
   const onAddItem = ({name, price}: {name: string; price: number}) => {
     updateOrderMenu({name, price, count: getProductCount(name) + 1});
