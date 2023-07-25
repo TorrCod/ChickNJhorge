@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Layout from '../layout/layout';
 import {style} from '../styles/style';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
@@ -9,12 +9,16 @@ import Product from '../component/product';
 import MenuTitle from '../component/title';
 import useTheme from '../hooks/useTheme';
 import useMenuContext from '../context/menuContext';
+import {fetchMenu} from '../service/firestore';
+import useMenu from '../hooks/useMenu';
 
 const Menu = ({
   navigation,
   route,
 }: BottomTabScreenProps<RootStackParamList>) => {
   const {updateOrderMenu, getProductCount} = useMenuContext();
+
+  const {menuItems, loading} = useMenu();
 
   const onAddItem = ({name, price}: {name: string; price: number}) => {
     updateOrderMenu({name, price, count: getProductCount(name) + 1});
@@ -27,7 +31,7 @@ const Menu = ({
   return (
     <Layout onCartPress={() => navigation.navigate('PreOrder')}>
       <Search />
-      {MenuDummy.map(({section, menu}, index) => (
+      {menuItems?.map(({section, menu}, index) => (
         <View key={index}>
           <MenuTitle>{section}</MenuTitle>
           <View style={menuStyle.productsContainer}>
