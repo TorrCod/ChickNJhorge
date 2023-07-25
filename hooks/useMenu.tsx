@@ -14,9 +14,12 @@ const useMenuItems = () => {
     const unsub = firestore()
       .collection('Menu')
       .onSnapshot(async querySnapShot => {
-        const sections: string[] = [];
+        const sections: {id: string; name: string}[] = [];
         querySnapShot.forEach(documentSnapShot => {
-          sections.push(documentSnapShot.data().section);
+          sections.push({
+            id: documentSnapShot.id,
+            name: documentSnapShot.data().section,
+          });
         });
 
         const data: MenuItems[] = await Promise.all(
@@ -24,7 +27,7 @@ const useMenuItems = () => {
             let menu: {name: string; price: number}[] = [];
             const querySnapShot = await firestore()
               .collection('Menu')
-              .doc(section)
+              .doc(section.id)
               .collection('menu')
               .get();
 
@@ -33,25 +36,10 @@ const useMenuItems = () => {
                 documentSnapShot.data() as {name: string; price: number},
               );
             });
-            return {section, menu};
+            return {section: section.name, menu};
           }),
         );
         setMenuItems(data);
-
-        // for (const section of sections) {
-        //   firestore()
-        //     .collection('Menu')
-        //     .doc(section)
-        //     .collection('menu')
-        //     .get()
-        //     .then(querySnapShot => {
-        //       const localMenu: MenuItems[] = [];
-        //       querySnapShot.forEach(documentSnapShot => {
-        //         localMenu.push({section, menu: documentSnapShot.data() as []});
-        //       });
-        //       console.log(localMenu);
-        //     });
-        // }
       });
 
     return () => unsub();

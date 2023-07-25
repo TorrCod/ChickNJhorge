@@ -1,15 +1,12 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import Layout from '../layout/layout';
-import {style} from '../styles/style';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from '../types/navigation';
 import Search from '../component/search';
 import Product from '../component/product';
 import MenuTitle from '../component/title';
-import useTheme from '../hooks/useTheme';
 import useMenuContext from '../context/menuContext';
-import {fetchMenu} from '../service/firestore';
 import useMenu from '../hooks/useMenu';
 
 const Menu = ({
