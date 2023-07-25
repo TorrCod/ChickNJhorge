@@ -60,7 +60,7 @@ const Product = ({
       </Text>
       <Text
         style={{
-          color: productCount ? 'rgba(255, 255, 255, 0.8)' : theme.text,
+          color: productCount ? 'white' : theme.text,
           ...(productCount ? localStyles.shadow : {}),
         }}>
         ₱ {price}
